@@ -1,0 +1,8 @@
+=Project info:=
+The project is a an isometric action/adventure game in a 3D environment using 2D sprites. The setting is steampunk and horror.
+
+=Design documents:=
+
+[https://docs.google.com/document/d/1-evv1qopFTiZVgdjjp9_vk6fsgROC5vyDGnr8TEtPFQ/edit# Story and setting]
+
+[https://www.dropbox.com/sh/y8zyix7jwvhcl94/gsucJmCzer Raido asjad]
