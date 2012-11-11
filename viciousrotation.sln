@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{5576076F-D956-628B-DAB1-2A15EFA5D3C5}") = "viciousrotation", "Assembly-CSharp-firstpass.csproj", "{2919D272-92B5-FE98-6D0F-5F8FFF5C8038}"
 EndProject
+Project("{5576076F-D956-628B-DAB1-2A15EFA5D3C5}") = "viciousrotation", "Assembly-CSharp.csproj", "{05CD5066-736C-2337-D05C-A388E33B9C82}"
+EndProject
 Project("{5576076F-D956-628B-DAB1-2A15EFA5D3C5}") = "viciousrotation", "Assembly-UnityScript-firstpass.unityproj", "{3E193F68-8F04-0D8B-F452-D1CAE1470965}"
 EndProject
 Project("{5576076F-D956-628B-DAB1-2A15EFA5D3C5}") = "viciousrotation", "Assembly-UnityScript.unityproj", "{6131F221-29F3-A500-932B-CE20E8A6F0B5}"
@@ -17,6 +19,10 @@ Global
 		{2919D272-92B5-FE98-6D0F-5F8FFF5C8038}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2919D272-92B5-FE98-6D0F-5F8FFF5C8038}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2919D272-92B5-FE98-6D0F-5F8FFF5C8038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05CD5066-736C-2337-D05C-A388E33B9C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05CD5066-736C-2337-D05C-A388E33B9C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05CD5066-736C-2337-D05C-A388E33B9C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05CD5066-736C-2337-D05C-A388E33B9C82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E193F68-8F04-0D8B-F452-D1CAE1470965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E193F68-8F04-0D8B-F452-D1CAE1470965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E193F68-8F04-0D8B-F452-D1CAE1470965}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,7 +35,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-		GlobalSection(MonoDevelopProperties) = preSolution
+											GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
