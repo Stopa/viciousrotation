@@ -1,3 +1,4 @@
+#labels Featured
 =Project info:=
 The project is a an isometric action/adventure game in a 3D environment using 2D sprites. The setting is steampunk and horror.
 
