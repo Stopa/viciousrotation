@@ -3,27 +3,32 @@ using System.Collections;
 
 public class CharacterBehaviour : MonoBehaviour {
 	
-	public GameObject playerGameObject;
-	public CharacterController playerCharacterController;
+	public GameObject _playerGameObject;
+	public CharacterController _playerCharacterController;
+	private GameObject _cameraTarget;
 
 	// Use this for initialization
 	void Start () {
-		playerGameObject = GameObject.Find("PlayerCharacterObject");
-		playerCharacterController = (CharacterController)playerGameObject.GetComponent("CharacterController");
+		_playerGameObject = GameObject.Find("PlayerCharacterObject");
+		_playerCharacterController = (CharacterController)_playerGameObject.GetComponent("CharacterController");
+		_cameraTarget = GameObject.Find("CameraTarget");
 		drawCharacterSprite();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
+		//camera follow
+		
 		Vector3 moveDirection = Vector3.zero;
 		
-		if(playerCharacterController.isGrounded) {
+		if(_playerCharacterController.isGrounded) {
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 	        moveDirection = transform.TransformDirection(moveDirection);
         	moveDirection *= 10;
 		}
 		moveDirection.y -= 20 * Time.deltaTime;
-		playerCharacterController.Move(moveDirection * Time.deltaTime);
+		_playerCharacterController.Move(moveDirection * Time.deltaTime);
 		/*if(Input.GetButton("Vertical")) {
 			Vector3 direction;
 			if(Input.GetAxis("Vertical") > 0) {
@@ -47,7 +52,22 @@ public class CharacterBehaviour : MonoBehaviour {
 	void drawCharacterSprite() {
 		GameObject refGameObject = GameObject.Find("PlayerCharacterSpriteManager");
 		SpriteManager mySpriteManager = (SpriteManager)refGameObject.GetComponent("LinkedSpriteManager");
+
+		Sprite playerSprite = mySpriteManager.AddSprite(_playerGameObject,3f,6f, 0,0,64,128,true);
+		UVAnimation animation1 = new UVAnimation();
+		Vector2 startPosUV = mySpriteManager.PixelCoordToUVCoord(0, 128);
+        Vector2 spriteSize = mySpriteManager.PixelSpaceToUVSpace(64, 128);
+
+        animation1.BuildUVAnim(startPosUV, spriteSize, 8, 1, 8, 8);
+        animation1.name = "walk_right";
+        animation1.loopCycles = -1;
 		
-		mySpriteManager.AddSprite(playerGameObject,4f,4f, 0,0,64,128,true);
+		playerSprite.AddAnimation(animation1);
+		playerSprite.PlayAnim("walk_right");
+		
+	}
+	
+	void adjustCamera(){
+		
 	}
 }
