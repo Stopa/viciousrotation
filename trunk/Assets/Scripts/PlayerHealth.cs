@@ -2,15 +2,15 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerHealth : MonoBehaviour {
-	public int maxHealth = 100;
-	public int curHealth = 100;
+	public int _maxHealth = 100;
+	public int _curHealth = 100;
 	
-	public float healthBarLength;
-	public int healthBarYLoc; 
+	public float _healthBarLength;
+	public int _healthBarYLoc; 
 	
 	// Use this for initialization
 	void Start () {
-		healthBarLength = Screen.width / 2;
+		_healthBarLength = Screen.width / 2;
 	}
 	
 	// Update is called once per frame
@@ -19,20 +19,20 @@ public class PlayerHealth : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		GUI.Box(new Rect(10, healthBarYLoc, healthBarLength, 20), curHealth + "/" + maxHealth);	
+		GUI.Box(new Rect(10, _healthBarYLoc, _healthBarLength, 20), _curHealth + "/" + _maxHealth);	
 		
 	}
 	
 	public void AdjustCurrentHealth(int adj) {
-		curHealth += adj;
+		_curHealth += adj;
 		
-		if(curHealth < 0)
-			curHealth = 0;
-		if(curHealth > maxHealth)
-			curHealth = maxHealth;
-		if(maxHealth < 1)
-			maxHealth = 1;
+		if(_curHealth < 0)
+			_curHealth = 0;
+		if(_curHealth > _maxHealth)
+			_curHealth = _maxHealth;
+		if(_maxHealth < 1)
+			_maxHealth = 1;
 		
-		healthBarLength = (Screen.width / 2) * (curHealth / (float)maxHealth);
+		_healthBarLength = (Screen.width / 2) * (_curHealth / (float)_maxHealth);
 	}
 }

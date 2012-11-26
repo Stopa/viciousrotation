@@ -4,29 +4,29 @@ using System.Collections;
 public class PlayerAttack : MonoBehaviour {
 	
 	//public GameObject target;
-	public float attackTimer;
-	public float coolDown;
+	public float _attackTimer;
+	public float _coolDown;
 	private string _attackType;
 	
 	// Use this for initialization
 	void Start () {
-		attackTimer = 0;
-		coolDown = 2.0f;
+		_attackTimer = 0;
+		_coolDown = 2.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(attackTimer > 0)
-			attackTimer -= Time.deltaTime;
+		if(_attackTimer > 0)
+			_attackTimer -= Time.deltaTime;
 		
 		if(Input.GetButtonDown("Fire1")) {	
 			GameObject target = FindClickTarget();
 			
 			if(target != null) {
-				if(target.tag == "enemy" && attackTimer <= 0) {
+				if(target.tag == "enemy" && _attackTimer <= 0) {
 					Debug.Log("Hit enemy: " + target.name);
 					Attack(target);
-					attackTimer = coolDown;
+					_attackTimer = _coolDown;
 				}
 				else if(target.tag == "friendly") {
 					Debug.Log("Hit friendly: " + target.name);
