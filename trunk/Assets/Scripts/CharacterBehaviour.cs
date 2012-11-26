@@ -5,21 +5,16 @@ public class CharacterBehaviour : MonoBehaviour {
 	
 	public GameObject _playerGameObject;
 	public CharacterController _playerCharacterController;
-	private GameObject _cameraTarget;
 
 	// Use this for initialization
 	void Start () {
 		_playerGameObject = GameObject.Find("PlayerCharacterObject");
 		_playerCharacterController = (CharacterController)_playerGameObject.GetComponent("CharacterController");
-		_cameraTarget = GameObject.Find("CameraTarget");
 		drawCharacterSprite();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		//camera follow
-		
 		Vector3 moveDirection = Vector3.zero;
 		
 		if(_playerCharacterController.isGrounded) {
@@ -64,10 +59,6 @@ public class CharacterBehaviour : MonoBehaviour {
 		
 		playerSprite.AddAnimation(animation1);
 		playerSprite.PlayAnim("walk_right");
-		
-	}
-	
-	void adjustCamera(){
 		
 	}
 }
