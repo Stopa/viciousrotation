@@ -6,7 +6,7 @@ public class CameraControl : MonoBehaviour {
 	public GameObject _player;
 	
 	void Start(){
-		_player = GameObject.Find("PlayerCharacterObject");
+
 	}
 	void LateUpdate () {
 		Vector3 pos = _player.transform.position;
