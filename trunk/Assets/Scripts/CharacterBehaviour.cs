@@ -5,11 +5,14 @@ public class CharacterBehaviour : MonoBehaviour {
 	
 	public GameObject _playerGameObject;
 	public CharacterController _playerCharacterController;
+	public Weapon _curWeapon;
+	public ArrayList _playerWeapons;
 
 	// Use this for initialization
 	void Start () {
 		_playerGameObject = GameObject.Find("PlayerCharacterObject");
 		_playerCharacterController = (CharacterController)_playerGameObject.GetComponent("CharacterController");
+		InitWeapons();
 		drawCharacterSprite();
 	}
 	
@@ -60,5 +63,20 @@ public class CharacterBehaviour : MonoBehaviour {
 		playerSprite.AddAnimation(animation1);
 		playerSprite.PlayAnim("walk_right");
 		
+	}
+	
+	void InitWeapons() {
+		_playerWeapons = new ArrayList();
+		_playerWeapons.Add(new Weapon("melee_1", "melee", 5.0f, 5));
+		_playerWeapons.Add(new Weapon("melee_2", "melee", 4.0f, 10));
+		_playerWeapons.Add(new Weapon("ranged_1", "ranged", 15.0f, 15));
+		_curWeapon = _playerWeapons[0] as Weapon;
+		
+	}
+	
+	public void ChangeWeapon() {
+		int index = (_playerWeapons.IndexOf(_curWeapon) + 1)%3;	
+		_curWeapon = _playerWeapons[index] as Weapon;
+		Debug.Log("Changed weapon to: " + _curWeapon._name + ", damage: " + _curWeapon._damage);
 	}
 }

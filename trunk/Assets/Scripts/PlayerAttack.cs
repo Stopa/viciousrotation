@@ -18,7 +18,14 @@ public class PlayerAttack : MonoBehaviour {
 	void Update () {
 		if(_attackTimer > 0)
 			_attackTimer -= Time.deltaTime;
+		//TEMP change weapon
 		
+		if(Input.GetKeyUp(KeyCode.C)) {
+			GameObject pl = GameObject.Find("PlayerCharacterObject");
+			CharacterBehaviour cb = (CharacterBehaviour)pl.GetComponent("CharacterBehaviour");
+			cb.ChangeWeapon();
+		}
+		//TEMP attack
 		if(Input.GetButtonDown("Fire1")) {	
 			GameObject target = FindClickTarget();
 			
@@ -38,10 +45,14 @@ public class PlayerAttack : MonoBehaviour {
 	private void Attack(GameObject target) {
 		float distance = Vector3.Distance(target.transform.position, transform.position);
 		Debug.Log(distance);
+		GameObject pl = GameObject.Find("PlayerCharacterObject");
+		CharacterBehaviour cb = (CharacterBehaviour)pl.GetComponent("CharacterBehaviour");
+		Weapon w = cb._curWeapon;
 		
-		if(distance < 4){
+		if(distance <= w._range){	
+			Debug.Log("Damage enemy: " + w._damage);
 			PlayerHealth h = (PlayerHealth)target.GetComponent("PlayerHealth");
-			h.AdjustCurrentHealth(-10);
+			h.AdjustCurrentHealth(-w._damage);
 		}		
 		/*
 		float distance = Vector3.Distance(target.transform.position, transform.position);
@@ -65,7 +76,7 @@ public class PlayerAttack : MonoBehaviour {
 		//if clicked on ground, get clickpoint
 		if(ground.Raycast(cameraRay, out dist)){
 			Vector3 clickPoint = new Vector3(cameraRay.GetPoint(dist).x, playerPos.y, cameraRay.GetPoint(dist).z);
-         	Debug.Log("clickpoint " + clickPoint);
+         	//Debug.Log("clickpoint " + clickPoint);
 		}
 		
 		//if clicked on another object
