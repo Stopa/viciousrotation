@@ -5,15 +5,15 @@ public class CharacterBehaviour : MonoBehaviour {
 	
 	public GameObject _playerGameObject;
 	public CharacterController _playerCharacterController;
-	public Weapon _curWeapon;
-	public ArrayList _playerWeapons;
-
+	public PlayerCharacter _player;
+	
 	// Use this for initialization
 	void Start () {
 		_playerGameObject = GameObject.Find("PlayerCharacterObject");
 		_playerCharacterController = (CharacterController)_playerGameObject.GetComponent("CharacterController");
-		InitWeapons();
-		drawCharacterSprite();
+		//_player = new Player(100, 4);
+		//InitWeapons();
+		//drawCharacterSprite();
 	}
 	
 	// Update is called once per frame
@@ -64,19 +64,26 @@ public class CharacterBehaviour : MonoBehaviour {
 		playerSprite.PlayAnim("walk_right");
 		
 	}
-	
+	/*
 	void InitWeapons() {
-		_playerWeapons = new ArrayList();
-		_playerWeapons.Add(new Weapon("melee_1", "melee", 5.0f, 5));
-		_playerWeapons.Add(new Weapon("melee_2", "melee", 4.0f, 10));
-		_playerWeapons.Add(new Weapon("ranged_1", "ranged", 15.0f, 15));
-		_curWeapon = _playerWeapons[0] as Weapon;
+		_player._weapons = new ArrayList();
+		_player._weapons.Add(new Weapon("melee_1", "melee", 5.0f, 5, 1.0f));
+		_player._weapons.Add(new Weapon("melee_2", "melee", 4.0f, 10, 1.0f));
+		_player._weapons.Add(new Weapon("ranged_1", "ranged", 15.0f, 15, 3.0f));
+		_player.Weapon = _player._weapons[0] as Weapon;
 		
 	}
 	
 	public void ChangeWeapon() {
-		int index = (_playerWeapons.IndexOf(_curWeapon) + 1)%3;	
-		_curWeapon = _playerWeapons[index] as Weapon;
-		Debug.Log("Changed weapon to: " + _curWeapon._name + ", damage: " + _curWeapon._damage);
+		int index = (_player._weapons.IndexOf(_player._curWeapon) + 1)%3;	
+		_player._curWeapon = _player._weapons[index] as Weapon;
+		Debug.Log("Changed weapon to: " + _player._curWeapon._name + ", damage: " + _player._curWeapon._damage);
 	}
+	
+	public void Attack() {
+
+	}
+	*/
+	//public void 
+	
 }
