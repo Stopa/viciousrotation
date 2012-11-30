@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Character\FriendlyCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerCharacter.cs" />
      <Compile Include="Assets\Scripts\CharacterBehaviour.cs" />
+     <Compile Include="Assets\Scripts\DayCycle.cs" />
      <Compile Include="Assets\Scripts\HealthDisplay.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\LinkedSpriteManager.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\Sprite.cs" />
