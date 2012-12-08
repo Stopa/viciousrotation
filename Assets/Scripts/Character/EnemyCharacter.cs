@@ -8,11 +8,8 @@ public class EnemyCharacter: BaseCharacter {
 	public float _aggroDistance;
 	
 	void Awake(){
-		Name = "Zombie Cube";
-		Speed = 1;
-		MaxHealth = 100;
-		Health = 100;
-		Weapon = new Weapon("melee_fist", "melee", 4.0f, 10, 1.0f);
+		InitWeapons();
+		InitAttributes("Zombie Cube", 1, 50, 50);
 	}
 
 	// Use this for initialization
@@ -23,6 +20,10 @@ public class EnemyCharacter: BaseCharacter {
 	
 	// Update is called once per frame
 	void Update () {
+		if(Health <= 0) {
+			DropItem();
+			Destroy(gameObject);
+		}
 		float distance = Vector3.Distance(_target.position, transform.position);
 		if(distance <= Weapon._range) {
 			//attack
@@ -33,5 +34,20 @@ public class EnemyCharacter: BaseCharacter {
 			//move
 			transform.position += transform.forward * Speed * Time.deltaTime;	
 		}
+	}
+	
+	#region init	
+	void InitWeapons() {
+		Weapon = new Weapon("melee_fist", "melee", 4.0f, 10, 1.0f);		
+	}
+	
+	void InitAnimations() {	
+		
+	}
+	#endregion
+	
+	private void DropItem() {
+		GameObject item = (GameObject)Instantiate(Resources.Load("Prefabs/DroppedItem"), transform.position, Quaternion.identity);		
+		
 	}
 }
