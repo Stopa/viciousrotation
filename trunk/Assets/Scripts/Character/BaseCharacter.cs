@@ -73,8 +73,10 @@ public class BaseCharacter: MonoBehaviour {
 	}
 	#endregion
 	
-	private void InitAttributes() {
-		
-		
+	public void InitAttributes(string name, int speed, int maxHealth, int health) {
+		_name = name;
+		_moveSpeed = speed;
+		_maxHealth = maxHealth;
+		_curHealth = health;
 	}
 }

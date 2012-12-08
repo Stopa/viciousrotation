@@ -6,6 +6,7 @@ public class DayCycle : MonoBehaviour {
 	public GameObject[] _suns;
 	public float _cycleLength;
 	public float _cycleTime;
+	public float _changeTime;
 	private int _currentSun;
 	
 	// Use this for initialization
@@ -25,7 +26,7 @@ public class DayCycle : MonoBehaviour {
 		else if(_cycleTime <= 3 || (_cycleTime >= 10 && _cycleTime <= 13)) {
 			ChangeSun(1);
 		}
-		else if(_cycleTime >= 3 && _cycleTime <= 10){
+		else if(_cycleTime >= 3 && _cycleTime <= 10) {
 			ChangeSun(2);
 		}
 	}
@@ -38,6 +39,11 @@ public class DayCycle : MonoBehaviour {
 			_currentSun = sun;
 			Debug.Log("Changed sun to " + _suns[_currentSun].name);
 		}
+	}
+	
+	private void ChangeLight(int sun, float duration) {
+		
+		
 	}
 	
 }

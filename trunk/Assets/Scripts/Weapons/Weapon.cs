@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class Weapon {
+public class Weapon : Item{
 	
-	public string _name;
 	public string _type;
 	public float _range;
 	public int _damage;
