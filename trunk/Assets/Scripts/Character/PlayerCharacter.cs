@@ -8,6 +8,8 @@ public class PlayerCharacter: BaseCharacter {
 	private ArrayList _weapons;
 	private float _attackTimer;
 	private Vector3 _clickPoint;
+	private Sprite playerSprite;
+	private SpriteManager characterSpriteManager;
 	
 	public ArrayList _ingredients;
 	public ArrayList _formulas;
@@ -25,7 +27,7 @@ public class PlayerCharacter: BaseCharacter {
 		
 		_attackTimer = 0;
 		
-		DrawCharacterSprite();
+		InitCharacterSprite();
 	}
 	
 	// Update is called once per frame
@@ -40,6 +42,35 @@ public class PlayerCharacter: BaseCharacter {
 		}
 		moveDirection.y -= 20 * Time.deltaTime;
 		_playerCharacterController.Move(moveDirection * Time.deltaTime);
+		
+		string animationName = null;
+		//determine animations
+		if(moveDirection.z > 0 && moveDirection.x == 0) {
+			animationName = "walk_t";
+		} else if(moveDirection.z > 0 && moveDirection.x > 0) {
+			animationName = "walk_tr";
+		} else if(moveDirection.z == 0 && moveDirection.x > 0) {
+			animationName = "walk_r";
+		} else if(moveDirection.z < 0 && moveDirection.x > 0) {
+			animationName = "walk_dr";
+		} else if(moveDirection.z < 0 && moveDirection.x == 0) {
+			animationName = "walk_d";
+		} else if(moveDirection.z < 0 && moveDirection.x < 0) {
+			animationName = "walk_dl";
+		} else if(moveDirection.z == 0 && moveDirection.x < 0) {
+			animationName = "walk_l";
+		} else if(moveDirection.z < 0 && moveDirection.x > 0) {
+			animationName = "walk_tl";
+		}
+		
+		if(animationName != null) {
+			if(playerSprite.getCurAnim() == null || playerSprite.getCurAnim().name != animationName) {
+				playerSprite.PlayAnim(animationName);
+			}
+		} else {
+			characterSpriteManager.StopAnimation(playerSprite);
+			
+		}
 		
 		//ATTACK
 		if(_attackTimer > 0)
@@ -161,30 +192,34 @@ public class PlayerCharacter: BaseCharacter {
 		
 	#region graphics
 	
-	private void InitAnimations() {
+	private void InitCharacterSprite() {
+		GameObject refGameObject = GameObject.Find("PlayerCharacterSpriteManager");
+		characterSpriteManager = (SpriteManager)refGameObject.GetComponent("LinkedSpriteManager");
+
+		playerSprite = characterSpriteManager.AddSprite(gameObject,3f,6f, 0,96,64,96,true);
 		
-		
+		CreateCharacterAnimations();
 	}
 	
-	/*
-	 *  play animation
-	 */
-	private void DrawCharacterSprite() {
-		GameObject refGameObject = GameObject.Find("PlayerCharacterSpriteManager");
-		SpriteManager mySpriteManager = (SpriteManager)refGameObject.GetComponent("LinkedSpriteManager");
-
-		Sprite playerSprite = mySpriteManager.AddSprite(gameObject,3f,6f, 0,0,64,128,true);
-		UVAnimation animation1 = new UVAnimation();
-		Vector2 startPosUV = mySpriteManager.PixelCoordToUVCoord(0, 128);
-        Vector2 spriteSize = mySpriteManager.PixelSpaceToUVSpace(57, 128);
-
-        animation1.BuildUVAnim(startPosUV, spriteSize, 8, 1, 8, 8);
-        animation1.name = "walk_right";
-        animation1.loopCycles = -1;
+	private void CreateCharacterAnimations() {
+		Vector2 spriteUVSize = characterSpriteManager.PixelSpaceToUVSpace(64,96);
 		
-		playerSprite.AddAnimation(animation1);
-		playerSprite.PlayAnim("walk_right");
-		
+		AddAnimation("walk_dl", spriteUVSize, 96);
+		AddAnimation("walk_d", spriteUVSize, 192);
+		AddAnimation("walk_dr", spriteUVSize, 288);
+		AddAnimation("walk_l", spriteUVSize, 384);
+		AddAnimation("walk_tl", spriteUVSize, 480);
+		AddAnimation("walk_r", spriteUVSize, 576);
+		AddAnimation("walk_tr", spriteUVSize, 672);
+		AddAnimation("walk_t", spriteUVSize, 768);
+	}
+	
+	private void AddAnimation(string name, Vector2 spriteSize, int bottomLeftPixelCoordinate) {
+		UVAnimation animation = new UVAnimation();
+		animation.name = name;
+		animation.loopCycles = -1;
+		animation.BuildUVAnim(characterSpriteManager.PixelCoordToUVCoord(0, bottomLeftPixelCoordinate), spriteSize, 8, 1, 8, 8);
+		playerSprite.AddAnimation(animation);
 	}
 	#endregion
 		

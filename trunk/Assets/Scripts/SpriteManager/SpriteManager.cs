@@ -880,6 +880,7 @@ public class SpriteManager : MonoBehaviour
 	public void StopAnimation(Sprite s)
 	{
 		playingAnimations.Remove(s);
+		s.curAnimStopped();
 	}
  
 	public Sprite GetSprite(int i)
