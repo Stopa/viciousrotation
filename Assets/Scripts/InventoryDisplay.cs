@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class InventoryDisplay : MonoBehaviour {
 	//INVENTORY
 	private Rect _inventoryWindow = new Rect(100,200,400,200);
-	public Texture _ingredientsImage;
 	private bool _display;
 	private bool _canCraftItem;
 	
@@ -13,10 +12,21 @@ public class InventoryDisplay : MonoBehaviour {
 	private ArrayList _tempIngredients;
 	private Formula  _selectedFormula;
 	
+	
+	//clock 
+	public Texture2D _clockBackground;
+	public Texture2D _clockHand;
+	public float _cycleTime;
+    public float _clockAngle = 0;
+    Rect _clockRect;
+    Vector2 _clockPivot;
+
 	// Use this for initialization
 	void Start () {
 		_display = false;
 		_canCraftItem = false;
+		_cycleTime = 5;
+		UpdateSettings();
 	}
 	
 	// Update is called once per frame
@@ -24,24 +34,47 @@ public class InventoryDisplay : MonoBehaviour {
 		if(Input.GetKeyUp(KeyCode.I)) {
 			_display = !_display;
 		}
+		_clockAngle += Time.deltaTime * 360 / _cycleTime;
+		_clockAngle = _clockAngle - Mathf.Floor(_clockAngle/360)*360;		
 	}
+	
+	void UpdateSettings() {
+		Vector2 size = new Vector2(128, 128);
+    	Vector2 pos = new Vector2(0, 0);
+        _clockRect = new Rect(pos.x, pos.y, size.x, size.y);
+        _clockPivot = new Vector2(_clockRect.xMin + _clockRect.width * 0.5f, _clockRect.yMin + _clockRect.height * 0.5f);
+    }
+	
 	#region display
 	void OnGUI() {	
+		//CLOCK
+		//if (Application.isEditor) { UpdateSettings(); } --- DNO WHAT THIS IS LOL
+		DisplayClock();
+		
+		//GUI.DrawTexture(new Rect(0,0,128,128), _clock);
+		//OTHER
 		_player = gameObject.GetComponent("PlayerCharacter") as PlayerCharacter;
 		Texture2D weapIcon = _player.Weapon._icon;
-		
-		GUI.Box(new Rect(0,0,128,128),"");
-		
+
 		if(weapIcon != null)
 			GUI.DrawTexture(new Rect(0,128,64,64), weapIcon);
-			GUI.Box(new Rect(0,128+ 64 * 1,64,64),"1");
+		
+		GUI.Box(new Rect(0,128+ 64 * 1,64,64),"1");
 		
 		if(_display) {
 			_inventoryWindow = GUI.Window(1, _inventoryWindow, InventoryWindow, "Inventory");
 		}
     }
-
-    public void InventoryWindow(int id){
+	
+	private void DisplayClock() {
+		GUI.DrawTexture(_clockRect, _clockBackground);
+		Matrix4x4 matrixBackup = GUI.matrix;
+        GUIUtility.RotateAroundPivot(_clockAngle, _clockPivot);
+        GUI.DrawTexture(_clockRect, _clockHand);
+        GUI.matrix = matrixBackup;
+	}
+	
+    private void InventoryWindow(int id) {
 		DisplayItems();
 		
 		//craft item button
