@@ -394,6 +394,14 @@ public class Sprite
  
 		m_manager.AnimateSprite(this);
 	}
+	
+	public UVAnimation getCurAnim() {
+		return curAnim;
+	}
+	
+	public void curAnimStopped() {
+		curAnim = null;
+	}
 }
  
  
