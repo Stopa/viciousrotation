@@ -59,17 +59,18 @@ public class PlayerCharacter: BaseCharacter {
 			animationName = "walk_dl";
 		} else if(moveDirection.z == 0 && moveDirection.x < 0) {
 			animationName = "walk_l";
-		} else if(moveDirection.z < 0 && moveDirection.x > 0) {
+		} else if(moveDirection.z > 0 && moveDirection.x < 0) {
 			animationName = "walk_tl";
 		}
 		
 		if(animationName != null) {
-			if(playerSprite.getCurAnim() == null || playerSprite.getCurAnim().name != animationName) {
+			if(playerSprite.GetCurAnim() == null || playerSprite.GetCurAnim().name != animationName) {
 				playerSprite.PlayAnim(animationName);
 			}
 		} else {
-			characterSpriteManager.StopAnimation(playerSprite);
-			
+			if(playerSprite.GetCurAnim() != null) {
+				playerSprite.PlayAnim(playerSprite.GetCurAnim().name.Replace ("walk", "idle"));
+			}
 		}
 		
 		//ATTACK
@@ -196,7 +197,7 @@ public class PlayerCharacter: BaseCharacter {
 		GameObject refGameObject = GameObject.Find("PlayerCharacterSpriteManager");
 		characterSpriteManager = (SpriteManager)refGameObject.GetComponent("LinkedSpriteManager");
 
-		playerSprite = characterSpriteManager.AddSprite(gameObject,3f,6f, 0,96,64,96,true);
+		playerSprite = characterSpriteManager.AddSprite(gameObject,4.47f,6.71f, 0,96,64,96,true);
 		
 		CreateCharacterAnimations();
 	}
@@ -204,21 +205,31 @@ public class PlayerCharacter: BaseCharacter {
 	private void CreateCharacterAnimations() {
 		Vector2 spriteUVSize = characterSpriteManager.PixelSpaceToUVSpace(64,96);
 		
-		AddAnimation("walk_dl", spriteUVSize, 96);
-		AddAnimation("walk_d", spriteUVSize, 192);
-		AddAnimation("walk_dr", spriteUVSize, 288);
-		AddAnimation("walk_l", spriteUVSize, 384);
-		AddAnimation("walk_tl", spriteUVSize, 480);
-		AddAnimation("walk_r", spriteUVSize, 576);
-		AddAnimation("walk_tr", spriteUVSize, 672);
-		AddAnimation("walk_t", spriteUVSize, 768);
+		AddAnimation("walk_dl",	spriteUVSize, 64, 96, 8);
+		AddAnimation("walk_d",	spriteUVSize, 64, 192, 8);
+		AddAnimation("walk_dr",	spriteUVSize, 64, 288, 8);
+		AddAnimation("walk_l",	spriteUVSize, 64, 384, 8);
+		AddAnimation("walk_tl",	spriteUVSize, 64, 480, 8);
+		AddAnimation("walk_r",	spriteUVSize, 64, 576, 8);
+		AddAnimation("walk_tr",	spriteUVSize, 64, 672, 8);
+		AddAnimation("walk_t",	spriteUVSize, 64, 768, 8);
+		
+		AddAnimation("idle_dl",	spriteUVSize, 0, 96,  1);
+		AddAnimation("idle_d",	spriteUVSize, 0, 192, 1);
+		AddAnimation("idle_dr",	spriteUVSize, 0, 288, 1);
+		AddAnimation("idle_l",	spriteUVSize, 0, 384, 1);
+		AddAnimation("idle_tl",	spriteUVSize, 0, 480, 1);
+		AddAnimation("idle_r",	spriteUVSize, 0, 576, 1);
+		AddAnimation("idle_tr",	spriteUVSize, 0, 672, 1);
+		AddAnimation("idle_t",	spriteUVSize, 0, 768, 1);
 	}
 	
-	private void AddAnimation(string name, Vector2 spriteSize, int bottomLeftPixelCoordinate) {
+	// assumes animation is on one row of the spritesheet
+	private void AddAnimation(string name, Vector2 spriteSize,int startLeft, int startBottom, int animationLength) {
 		UVAnimation animation = new UVAnimation();
 		animation.name = name;
 		animation.loopCycles = -1;
-		animation.BuildUVAnim(characterSpriteManager.PixelCoordToUVCoord(0, bottomLeftPixelCoordinate), spriteSize, 8, 1, 8, 8);
+		animation.BuildUVAnim(characterSpriteManager.PixelCoordToUVCoord(startLeft, startBottom), spriteSize, animationLength, 1, animationLength, 8);
 		playerSprite.AddAnimation(animation);
 	}
 	#endregion
