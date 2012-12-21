@@ -63,10 +63,9 @@ public class BaseCharacter: MonoBehaviour {
 	#region attacks
 	public void Attack(GameObject target) {
 		float distance = Vector3.Distance(target.transform.position, transform.position);
-		Debug.Log(distance);
 		
 		if(distance <= _curWeapon._range){	
-			Debug.Log("Damage to " +target.tag + ": " + _curWeapon._damage);
+			Debug.Log("Distance " + distance + ". Damage to " +target.tag + ": " + _curWeapon._damage);
 			BaseCharacter bc = (BaseCharacter)target.GetComponent("BaseCharacter");
 			bc.AdjustCurrentHealth(-(_curWeapon._damage));
 		}		

@@ -9,7 +9,7 @@ public class EnemyCharacter: BaseCharacter {
 	
 	void Awake(){
 		InitWeapons();
-		InitAttributes("Zombie Cube", 1, 50, 50);
+		InitAttributes("Zombie Cube", 1, 20, 20);
 	}
 
 	// Use this for initialization
@@ -47,7 +47,8 @@ public class EnemyCharacter: BaseCharacter {
 	#endregion
 	
 	private void DropItem() {
-		GameObject item = (GameObject)Instantiate(Resources.Load("Prefabs/DroppedItem"), transform.position, Quaternion.identity);		
-		
+		Vector3 pos = transform.position;
+		pos.y -= 1;
+		GameObject item = (GameObject)Instantiate(Resources.Load("Prefabs/DroppedItem"), pos, Quaternion.identity);		
 	}
 }

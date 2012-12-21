@@ -6,7 +6,13 @@ public class DialogueDisplay : MonoBehaviour {
 	public string[] selStrings;
 	// Use this for initialization
 	void Start () {
-		_showDialogue = true;
+		_showDialogue = false;
+	}
+	
+	void Update() {
+		if(Input.GetKeyUp(KeyCode.B)) {
+			_showDialogue = !_showDialogue;
+		}
 	}
 	
 	// Update is called once per frame
