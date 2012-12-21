@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class InventoryDisplay : MonoBehaviour {
-	//INVENTORY
-	private Rect _inventoryWindow = new Rect(100,200,400,200);
-	private bool _display;
-	private bool _canCraftItem;
 	
+	public bool _showHud;
+	public bool _showInventory;
+	public bool _showDialogue;	
 	public PlayerCharacter _player;
-	private ArrayList _tempIngredients;
-	private Formula  _selectedFormula;
 	
+	//INVENTORY
+	private Inventory _inventory;
+	private Rect _inventoryWindow = new Rect(100,200,400,250);
+	private bool _canCraftItem;
+	private Formula  _selectedFormula;
 	
 	//clock 
 	public Texture2D _clockBackground;
@@ -23,22 +25,30 @@ public class InventoryDisplay : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_display = false;
+		_player = gameObject.GetComponent("PlayerCharacter") as PlayerCharacter;
+		_inventory = _player._inventory;
+		_showInventory = false;
 		_canCraftItem = false;
-		_cycleTime = 5;
-		UpdateSettings();
+		_showHud = true;
+		_cycleTime = 180;
+		UpdateClockSettings();
+		//images
+		//_clockHand = Resources.Load("");
+		//_clockBackground = Resources.Load("");
 	}
 	
 	// Update is called once per frame
 	void Update () {		
 		if(Input.GetKeyUp(KeyCode.I)) {
-			_display = !_display;
+			_showInventory = !_showInventory;
 		}
 		_clockAngle += Time.deltaTime * 360 / _cycleTime;
-		_clockAngle = _clockAngle - Mathf.Floor(_clockAngle/360)*360;		
+		_clockAngle = _clockAngle - Mathf.Floor(_clockAngle/360)*360;
+		
+		
 	}
 	
-	void UpdateSettings() {
+	void UpdateClockSettings() {
 		Vector2 size = new Vector2(128, 128);
     	Vector2 pos = new Vector2(0, 0);
         _clockRect = new Rect(pos.x, pos.y, size.x, size.y);
@@ -47,22 +57,23 @@ public class InventoryDisplay : MonoBehaviour {
 	
 	#region display
 	void OnGUI() {	
-		//CLOCK
-		//if (Application.isEditor) { UpdateSettings(); } --- DNO WHAT THIS IS LOL
-		DisplayClock();
-		
-		//GUI.DrawTexture(new Rect(0,0,128,128), _clock);
-		//OTHER
-		_player = gameObject.GetComponent("PlayerCharacter") as PlayerCharacter;
-		Texture2D weapIcon = _player.Weapon._icon;
-
-		if(weapIcon != null)
-			GUI.DrawTexture(new Rect(0,128,64,64), weapIcon);
-		
-		GUI.Box(new Rect(0,128+ 64 * 1,64,64),"1");
-		
-		if(_display) {
-			_inventoryWindow = GUI.Window(1, _inventoryWindow, InventoryWindow, "Inventory");
+		if(_showHud) {
+			//CLOCK
+			//if (Application.isEditor) { UpdateSettings(); } --- DNO WHAT THIS IS LOL
+			DisplayClock();
+			
+			//OTHER
+			Texture2D weapIcon = _player.Weapon._icon;
+			Texture2D bombIcon = _player._curBomb._icon;
+			
+			if(weapIcon != null)
+				GUI.DrawTexture(new Rect(0,128,64,64), weapIcon);
+			if(bombIcon != null)
+				GUI.DrawTexture(new Rect(0,128+64,64,64), bombIcon);
+			
+			if(_showInventory) {
+				_inventoryWindow = GUI.Window(1, _inventoryWindow, InventoryWindow, "Inventory");
+			}
 		}
     }
 	
@@ -75,84 +86,53 @@ public class InventoryDisplay : MonoBehaviour {
 	}
 	
     private void InventoryWindow(int id) {
-		DisplayItems();
+		DisplayItems();		
 		
-		//craft item button
 		GUI.enabled = _canCraftItem;
-	    if (GUI.Button(new Rect(10, 180, 50, 30), "Craft!"))
-            CraftItem();
+	    if (GUI.Button(new Rect(10, 200, 50, 30), "Craft!"))
+             CraftItemBtnPressed();
 		GUI.enabled = true;
 	}
 	
 	private void DisplayItems() {
-		ArrayList bombs = _player._bombs;
-		ArrayList formulas = _player._formulas;
-		ArrayList ings = _player._ingredients;
+		ArrayList bombs = _inventory.Bombs;
+		ArrayList formulas = _inventory.Formulas;
+		ArrayList ings = _inventory.Ingredients;
 
 		int y = 10;
 		int x = 0;
 		foreach(Formula f in formulas) {
-			if (GUI.Button(new Rect(x, y, 64, 64), f._icon)) {
-				_selectedFormula = f;
-				CheckIngredients(f._ingredients);
-			}
+			if (GUI.Button(new Rect(x, y, 64, 64), f._icon))
+				FormulaBtnPressed(f);
 			x+= 70;
 		}
 		
-		y = 60;
+		y += 60;
 		x = 0;
 		foreach(Ingredient i in ings) {
 			GUI.DrawTexture(new Rect(x ,y, 64, 64), i._icon);
-			GUI.Label(new Rect(x+5, y+5, 30, 30), i._amount.ToString());
+			GUI.Label(new Rect(x+5, y+10, 30, 30), i._amount.ToString());
 			x+= 70;
 		}
 		
-		y = 120;
+		y += 60;
 		x = 0;
 		foreach(Explosive b in bombs) {
 			GUI.DrawTexture(new Rect(x, y, 64, 64), b._icon);
 			x+= 70;
 		} 
 	}
-	#endregion
 	
-	#region itemcreation
-	/*
-	 * 	Create the explosive
-	 */
-	private void CraftItem() {
-		Debug.Log("Crafting from formula: " + _selectedFormula._name);
-		/*_tempIngredients = _player._ingredients;
+	#endregion
 
-		Dictionary<Ingredient, int> d = _selectedFormula._ingredients;
-		foreach (var pair in d)
-		{
-			if(!CheckIngredient(pair.Key, pair.Value)) {
-				_tempIngredients = null;
-				return false;
-			}
-		}	
-		_player._ingredients = _tempIngredients;
-		_tempIngredients = null;
-		return true;
-		*/		
+	private void CraftItemBtnPressed() {
+		_inventory.CraftItem(_selectedFormula);
+		_canCraftItem = _inventory.CheckIngredients(_selectedFormula);
 	}
 	
-	/*
-	 * 	Check if the player has the required amount of ingredients needed
-	 */
-	private void CheckIngredients(Dictionary<Ingredient, int> d) {
-		_canCraftItem = true;
-		foreach (var pair in d) {
-			foreach(Ingredient i in _player._ingredients) {
-				if(i._name == pair.Key._name) {
-					if(!(i._amount >= pair.Value))
-						_canCraftItem = false;	
-					Debug.Log(pair.Value + " " + i._amount);
-				}
-			} 
-		}		
-	}	
-	#endregion
+	private void FormulaBtnPressed(Formula f) {
+		_selectedFormula = f;
+		_canCraftItem = _inventory.CheckIngredients(_selectedFormula);
+	}
 	
 }

@@ -2,12 +2,15 @@ using UnityEngine;
 using System.Collections;
 
 public class HealthDisplay : MonoBehaviour {
+	
 	private int _maxHealth;
 	private int _curHealth;
 	private BaseCharacter _character;
 	//HEALTH BAR
 	public float _healthBarLength;
 	public int _healthBarYLoc; 
+	
+	public Texture2D _healthBar;
 	
 	// Use this for initialization
 	void Start () {
@@ -26,8 +29,12 @@ public class HealthDisplay : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		GUI.Box(new Rect(100, _healthBarYLoc, _healthBarLength, 20), _curHealth + "/" + _maxHealth);
-
+		if(gameObject.CompareTag("Player")){
+			GUI.DrawTexture(new Rect(150, _healthBarYLoc, _healthBarLength, 20), _healthBar);
+			GUI.Label(new Rect(150, _healthBarYLoc, _healthBarLength, 20), _curHealth + "/" + _maxHealth);
+		}
+		else
+			GUI.Box(new Rect(150, _healthBarYLoc, _healthBarLength, 20), _curHealth + "/" + _maxHealth);
     }
 
 

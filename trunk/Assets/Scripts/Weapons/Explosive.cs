@@ -8,7 +8,7 @@ public class Explosive: Weapon {
 	
 	public Explosive(string name, string type, float range, float area, int damage, float cooldown) {
 		_name = name;
-		_type = type;
+		_type = "explosive";
 		_range = range;
 		_area = area;
 		_damage = damage;
