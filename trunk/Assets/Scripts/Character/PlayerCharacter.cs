@@ -6,8 +6,7 @@ public class PlayerCharacter: BaseCharacter {
 	public CharacterController _playerCharacterController;
 	private float _attackTimer;
 	private Vector3 _clickPoint;
-	private Sprite playerSprite;
-	private SpriteManager characterSpriteManager;
+	private BaseSprite sprite;
 	
 	public Inventory _inventory;
 	private ArrayList _weapons;
@@ -26,7 +25,7 @@ public class PlayerCharacter: BaseCharacter {
 		
 		_attackTimer = 0;
 		
-		InitCharacterSprite();
+		sprite = (BaseSprite)gameObject.GetComponent("PlayerCharacterSprite");
 	}
 	
 	// Update is called once per frame
@@ -63,12 +62,12 @@ public class PlayerCharacter: BaseCharacter {
 		}
 		
 		if(animationName != null) {
-			if(playerSprite.GetCurAnim() == null || playerSprite.GetCurAnim().name != animationName) {
-				playerSprite.PlayAnim(animationName);
+			if(sprite.IsAnimationNotRunning(animationName)) {
+				sprite.PlayAnimation(animationName);
 			}
 		} else {
-			if(playerSprite.GetCurAnim() != null) {
-				playerSprite.PlayAnim(playerSprite.GetCurAnim().name.Replace ("walk", "idle"));
+			if(sprite.CurrentAnimation() != null) {
+				sprite.PlayAnimation(sprite.CurrentAnimation().name.Replace ("walk", "idle"));
 			}
 		}
 		
@@ -177,48 +176,6 @@ public class PlayerCharacter: BaseCharacter {
 		_inventory.AddItem(item);
 	}
 		
-	#region graphics
-	
-	private void InitCharacterSprite() {
-		GameObject refGameObject = GameObject.Find("PlayerCharacterSpriteManager");
-		characterSpriteManager = (SpriteManager)refGameObject.GetComponent("LinkedSpriteManager");
-
-		playerSprite = characterSpriteManager.AddSprite(gameObject,4.47f,6.71f, 0,96,64,96,true);
-		
-		CreateCharacterAnimations();
-	}
-	
-	private void CreateCharacterAnimations() {
-		Vector2 spriteUVSize = characterSpriteManager.PixelSpaceToUVSpace(64,96);
-		
-		AddAnimation("walk_dl",	spriteUVSize, 64, 96, 8);
-		AddAnimation("walk_d",	spriteUVSize, 64, 192, 8);
-		AddAnimation("walk_dr",	spriteUVSize, 64, 288, 8);
-		AddAnimation("walk_l",	spriteUVSize, 64, 384, 8);
-		AddAnimation("walk_tl",	spriteUVSize, 64, 480, 8);
-		AddAnimation("walk_r",	spriteUVSize, 64, 576, 8);
-		AddAnimation("walk_tr",	spriteUVSize, 64, 672, 8);
-		AddAnimation("walk_t",	spriteUVSize, 64, 768, 8);
-		
-		AddAnimation("idle_dl",	spriteUVSize, 0, 96,  1);
-		AddAnimation("idle_d",	spriteUVSize, 0, 192, 1);
-		AddAnimation("idle_dr",	spriteUVSize, 0, 288, 1);
-		AddAnimation("idle_l",	spriteUVSize, 0, 384, 1);
-		AddAnimation("idle_tl",	spriteUVSize, 0, 480, 1);
-		AddAnimation("idle_r",	spriteUVSize, 0, 576, 1);
-		AddAnimation("idle_tr",	spriteUVSize, 0, 672, 1);
-		AddAnimation("idle_t",	spriteUVSize, 0, 768, 1);
-	}
-	
-	// assumes animation is on one row of the spritesheet
-	private void AddAnimation(string name, Vector2 spriteSize,int startLeft, int startBottom, int animationLength) {
-		UVAnimation animation = new UVAnimation();
-		animation.name = name;
-		animation.loopCycles = -1;
-		animation.BuildUVAnim(characterSpriteManager.PixelCoordToUVCoord(startLeft, startBottom), spriteSize, animationLength, 1, animationLength, 8);
-		playerSprite.AddAnimation(animation);
-	}
-	#endregion
 		
 	
 	private GameObject FindClickTarget(){

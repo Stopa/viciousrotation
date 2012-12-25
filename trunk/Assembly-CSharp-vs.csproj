@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\SpriteManager\SpriteManager.cs" />
      <Compile Include="Assets\Scripts\Sprites\BaseSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\PissFairySprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\PlayerCharacterSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\SlimeBallSprite.cs" />
      <Compile Include="Assets\Scripts\Weapons\DroppedItem.cs" />
      <Compile Include="Assets\Scripts\Weapons\Explosion.cs" />

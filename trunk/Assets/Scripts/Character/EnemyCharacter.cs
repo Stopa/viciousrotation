@@ -6,7 +6,7 @@ public class EnemyCharacter: BaseCharacter {
 	public Transform _target;
 	public float _rotationSpeed;
 	public float _aggroDistance;
-	BaseSprite sprite;
+	private BaseSprite sprite;
 	
 	void Awake(){
 		InitWeapons();
@@ -17,7 +17,7 @@ public class EnemyCharacter: BaseCharacter {
 	void Start () {
 		GameObject go = GameObject.FindGameObjectWithTag("Player");
 		_target = go.transform;
-		sprite = (BaseSprite)gameObject.GetComponent("BaseSprite");
+		sprite = (BaseSprite)gameObject.GetComponent("SlimeBallSprite");
 	}
 	
 	// Update is called once per frame

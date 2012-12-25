@@ -45,4 +45,8 @@ public class BaseSprite : MonoBehaviour {
 		spriteManager.StopAnimation(sprite);
 		spriteManager.RemoveSprite(sprite);
 	}
+	
+	public UVAnimation CurrentAnimation() {
+		return sprite.GetCurAnim();
+	}
 }
