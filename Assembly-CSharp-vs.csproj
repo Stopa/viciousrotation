@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>E:/proge/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>D:/Programs/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>E:/proge/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/Programs/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +57,9 @@
      <Compile Include="Assets\Scripts\SpriteManager\LinkedSpriteManager.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\Sprite.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\SpriteManager.cs" />
+     <Compile Include="Assets\Scripts\Sprites\BaseSprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\PissFairySprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\SlimeBallSprite.cs" />
      <Compile Include="Assets\Scripts\Weapons\DroppedItem.cs" />
      <Compile Include="Assets\Scripts\Weapons\Explosion.cs" />
      <Compile Include="Assets\Scripts\Weapons\Explosive.cs" />
@@ -64,15 +67,6 @@
      <Compile Include="Assets\Scripts\Weapons\Ingredient.cs" />
      <Compile Include="Assets\Scripts\Weapons\Item.cs" />
      <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
-     <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-     <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
- <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
- </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{2919D272-92B5-FE98-6D0F-5F8FFF5C8038}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
