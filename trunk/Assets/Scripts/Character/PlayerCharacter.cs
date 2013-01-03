@@ -6,11 +6,19 @@ public class PlayerCharacter: BaseCharacter {
 	public CharacterController _playerCharacterController;
 	private float _attackTimer;
 	private Vector3 _clickPoint;
-	private BaseSprite sprite;
+	private BaseSprite _sprite;
+	private HorisontalLookingDirection _horisontalLookingDirection;
+	private VerticalLookingDirection _verticalLookingDirection;
+	private ActionTaken _actionTaken;
 	
 	public Inventory _inventory;
 	private ArrayList _weapons;
 	public Explosive _curBomb;
+	
+	//feel free to refactor it to something better if you get an idea
+	enum HorisontalLookingDirection {Left, Middle, Right};
+	enum VerticalLookingDirection {Down, Middle, Up};
+	enum ActionTaken {Idle, Walk, MeleeAttack, RangedAttack} // add other possible actions
 	
 	void Awake(){
 		InitAttributes("P. McPlayer", 4, 100,100);
@@ -25,11 +33,12 @@ public class PlayerCharacter: BaseCharacter {
 		
 		_attackTimer = 0;
 		
-		sprite = (BaseSprite)gameObject.GetComponent("PlayerCharacterSprite");
+		_sprite = (BaseSprite)gameObject.GetComponent("PlayerCharacterSprite");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		_actionTaken = ActionTaken.Idle;
 		//MOVEMENT
 		Vector3 moveDirection = Vector3.zero;
 		
@@ -41,34 +50,23 @@ public class PlayerCharacter: BaseCharacter {
 		moveDirection.y -= 20 * Time.deltaTime;
 		_playerCharacterController.Move(moveDirection * Time.deltaTime);
 		
-		string animationName = null;
-		//determine animations
-		if(moveDirection.z > 0 && moveDirection.x == 0) {
-			animationName = "walk_t";
-		} else if(moveDirection.z > 0 && moveDirection.x > 0) {
-			animationName = "walk_tr";
-		} else if(moveDirection.z == 0 && moveDirection.x > 0) {
-			animationName = "walk_r";
-		} else if(moveDirection.z < 0 && moveDirection.x > 0) {
-			animationName = "walk_dr";
-		} else if(moveDirection.z < 0 && moveDirection.x == 0) {
-			animationName = "walk_d";
-		} else if(moveDirection.z < 0 && moveDirection.x < 0) {
-			animationName = "walk_dl";
-		} else if(moveDirection.z == 0 && moveDirection.x < 0) {
-			animationName = "walk_l";
-		} else if(moveDirection.z > 0 && moveDirection.x < 0) {
-			animationName = "walk_tl";
-		}
-		
-		if(animationName != null) {
-			if(sprite.IsAnimationNotRunning(animationName)) {
-				sprite.PlayAnimation(animationName);
-			}
-		} else {
-			if(sprite.CurrentAnimation() != null) {
-				sprite.PlayAnimation(sprite.CurrentAnimation().name.Replace ("walk", "idle"));
-			}
+		if(moveDirection.x != 0.0 || moveDirection.z != 0.0) {
+			//update looking direction
+			if(moveDirection.z > 0)
+				_verticalLookingDirection = VerticalLookingDirection.Up;
+			else if(moveDirection.z < 0)
+				_verticalLookingDirection = VerticalLookingDirection.Down;
+			else
+				_verticalLookingDirection = VerticalLookingDirection.Middle;
+			
+			if(moveDirection.x > 0)
+				_horisontalLookingDirection = HorisontalLookingDirection.Right;
+			else if(moveDirection.x < 0)
+				_horisontalLookingDirection = HorisontalLookingDirection.Left;
+			else
+				_horisontalLookingDirection = HorisontalLookingDirection.Middle;
+			
+			_actionTaken = ActionTaken.Walk;
 		}
 		
 		//ATTACK
@@ -92,7 +90,8 @@ public class PlayerCharacter: BaseCharacter {
 					Debug.Log("Hit friendly: " + target.name);
 				}
 			}
-			
+			//TODO - change the direction of the sprite so that the character looks towards clicked point
+			_actionTaken = ActionTaken.MeleeAttack;
 		}
 		//THROW BOMB
 		else if(Input.GetButtonDown("Fire2")) {	
@@ -102,7 +101,9 @@ public class PlayerCharacter: BaseCharacter {
 				Explosion expScript = explosion.GetComponent("Explosion") as Explosion;
 				expScript._damage = 10;
 			}
-		}	
+		}
+		
+		UpdateAnimations();
 	}
 	
 	#region init	
@@ -175,8 +176,6 @@ public class PlayerCharacter: BaseCharacter {
 	public void AddItem(Item item) {
 		_inventory.AddItem(item);
 	}
-		
-		
 	
 	private GameObject FindClickTarget(){
 		Vector3 playerPos = transform.position;
@@ -191,7 +190,8 @@ public class PlayerCharacter: BaseCharacter {
 		//if clicked on ground, get clickpoint
 		if(ground.Raycast(cameraRay, out dist)){
 			_clickPoint = new Vector3(cameraRay.GetPoint(dist).x, playerPos.y, cameraRay.GetPoint(dist).z);
-         	//Debug.Log("clickpoint " + clickPoint);
+         	//Debug.Log("clickpoint " + _clickPoint);
+			LookTowards(_clickPoint);
 		}
 		
 		//if clicked on another object
@@ -203,4 +203,83 @@ public class PlayerCharacter: BaseCharacter {
 		
 		return null;
 	}
+	
+	#region graphics
+	private void UpdateAnimations() {
+		string animationName = "";
+		
+		if(_actionTaken == ActionTaken.Walk) {
+			animationName = "walk_" + DirectionAbbreviation();
+		} else if(_actionTaken == ActionTaken.MeleeAttack) {
+			string vertical = "d";
+			string horisontal = "";
+			
+			if(_verticalLookingDirection == VerticalLookingDirection.Up) {
+				vertical = "t";
+			}
+			
+			if(_horisontalLookingDirection == HorisontalLookingDirection.Left) {
+				horisontal = "l";
+			}
+			
+			if(_horisontalLookingDirection == HorisontalLookingDirection.Right) {
+				horisontal = "r";
+			}
+			
+			animationName = "melee_"+vertical+horisontal;
+		} else if(_actionTaken == ActionTaken.RangedAttack) {
+			animationName = "ranged_";
+			
+			if(_horisontalLookingDirection == HorisontalLookingDirection.Left) {
+				animationName += "l";
+			} else {
+				animationName += "r";
+			}
+		} else if(_actionTaken == ActionTaken.Idle) {
+			animationName = "idle_" + DirectionAbbreviation();
+		}
+		
+		if(_sprite.IsAnimationNotRunning(animationName)) {
+			_sprite.PlayAnimationIfCanInterrupt(animationName);
+		}
+	}
+	
+	private string DirectionAbbreviation() {
+		string result = "";
+		
+		if(_verticalLookingDirection == VerticalLookingDirection.Up) {
+			result += "t";
+		} else if(_verticalLookingDirection == VerticalLookingDirection.Down) {
+			result += "d";
+		}
+		
+		if(_horisontalLookingDirection == HorisontalLookingDirection.Left) {
+			result += "l";
+		} else if(_horisontalLookingDirection == HorisontalLookingDirection.Right) {
+			result += "r";
+		}
+		
+		return result;
+	}
+	
+	private void LookTowards(Vector3 position) {
+		Vector3 myPosition = gameObject.transform.position;
+		
+		if(position.x > myPosition.x) {
+			_horisontalLookingDirection = HorisontalLookingDirection.Right;
+		} else if(position.x < myPosition.x) {
+			_horisontalLookingDirection = HorisontalLookingDirection.Left;
+		} else {
+			_horisontalLookingDirection = HorisontalLookingDirection.Middle;
+		}
+		
+		if(position.z > myPosition.z) {
+			_verticalLookingDirection = VerticalLookingDirection.Up;
+		} else if(position.z < myPosition.z) {
+			_verticalLookingDirection = VerticalLookingDirection.Down;
+		} else {
+			_verticalLookingDirection = VerticalLookingDirection.Middle;
+		}
+	}
+	#endregion
 }
