@@ -37,7 +37,7 @@ public class EnemyCharacter: BaseCharacter {
 			//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_target.position - transform.position), _rotationSpeed * Time.deltaTime);	
 			//move
 			// TODO - y coordinate seems to fuck up somewhere. not sure where.
-			Vector3 moveDirection = new Vector3(_target.position.x-transform.position.x,_target.position.y-transform.position.y,0);
+			Vector3 moveDirection = new Vector3(_target.position.x-transform.position.x,0,_target.position.z-transform.position.z);
 			transform.position += moveDirection * Speed * Time.deltaTime;
 			SpriteWalkAnimation();
 		} else {

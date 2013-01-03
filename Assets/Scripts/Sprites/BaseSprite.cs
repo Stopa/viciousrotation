@@ -12,6 +12,7 @@ public class BaseSprite : MonoBehaviour {
 	
 	protected Sprite sprite;
 	protected SpriteManager spriteManager;
+	protected bool _animationRunning;
 
 	// Use this for initialization
 	void Start () {
@@ -21,19 +22,34 @@ public class BaseSprite : MonoBehaviour {
 		if(defaultAnimationName.Length > 0) {
 			sprite.PlayAnim(defaultAnimationName);
 		}
+		sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(AnimationCompleted));
 	}
 	
 	protected virtual void DefineSpriteAnimations() {}
 	
-	protected void AddAnimation(string name, Vector2 spriteSize,int startLeft, int startBottom, int animationLength) {
+	protected void AddAnimation(string name, Vector2 spriteSize,int startLeft, int startBottom, int animationLength, bool loop = true) {
 		UVAnimation animation = new UVAnimation();
 		animation.name = name;
-		animation.loopCycles = -1;
+		if(loop) {
+			animation.loopCycles = -1;
+		} else {
+			animation.loopCycles = 0;
+		}
 		animation.BuildUVAnim(spriteManager.PixelCoordToUVCoord(startLeft, startBottom), spriteSize, animationLength, 1, animationLength, 8);
 		sprite.AddAnimation(animation);
 	}
 	
+	// use if you don't wish to interrupt currently running non-looping animation (e.g. attack)
+	public void PlayAnimationIfCanInterrupt(string animationName) {
+		//Debug.Log ("i can has animaate?");
+		if(!_animationRunning || sprite.GetCurAnim() != null && sprite.GetCurAnim().loopCycles == -1) {
+			//Debug.Log ("yes u can");
+			PlayAnimation (animationName);
+		}
+	}
+	
 	public void PlayAnimation(string animationName) {
+		_animationRunning = true;
 		sprite.PlayAnim(animationName);
 	}
 	
@@ -46,7 +62,11 @@ public class BaseSprite : MonoBehaviour {
 		spriteManager.RemoveSprite(sprite);
 	}
 	
-	public UVAnimation CurrentAnimation() {
+	public UVAnimation GetCurrentAnimation() {
 		return sprite.GetCurAnim();
+	}
+	
+	void AnimationCompleted() {
+		_animationRunning = false;
 	}
 }
