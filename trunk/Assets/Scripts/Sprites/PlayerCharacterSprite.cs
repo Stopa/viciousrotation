@@ -28,10 +28,13 @@ public class PlayerCharacterSprite : BaseSprite {
 		AddAnimation("melee_d",  spriteUVSize, 768, 480, 4, false);
 		AddAnimation("melee_dr", spriteUVSize, 0,   576, 4, false);
 		AddAnimation("melee_tl", spriteUVSize, 256, 576, 4, false);
+		AddAnimation("melee_t",  spriteUVSize, 768, 576, 4, false);
 		AddAnimation("melee_tr", spriteUVSize, 512, 576, 4, false);
 		
-		AddAnimation("ranged_l", spriteUVSize, 768, 576, 4, false);
-		AddAnimation("ranged_r", spriteUVSize, 0,   672, 4, false);
+		AddAnimation("ranged_l", spriteUVSize, 0,   672, 4, false);
+		AddAnimation("ranged_r", spriteUVSize, 256, 672, 4, false);
+		AddAnimation("ranged_d", spriteUVSize, 512, 672, 4, false);
+		AddAnimation("ranged_t", spriteUVSize, 768, 672, 4, false);
+
 	}
-	
 }
