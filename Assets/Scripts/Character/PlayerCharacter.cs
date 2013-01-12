@@ -211,18 +211,18 @@ public class PlayerCharacter: BaseCharacter {
 		if(_actionTaken == ActionTaken.Walk) {
 			animationName = "walk_" + DirectionAbbreviation();
 		} else if(_actionTaken == ActionTaken.MeleeAttack) {
-			string vertical = "d";
+			string vertical = "";
 			string horisontal = "";
 			
 			if(_verticalLookingDirection == VerticalLookingDirection.Up) {
 				vertical = "t";
+			} else {
+				vertical = "d";
 			}
 			
 			if(_horisontalLookingDirection == HorisontalLookingDirection.Left) {
 				horisontal = "l";
-			}
-			
-			if(_horisontalLookingDirection == HorisontalLookingDirection.Right) {
+			} else if(_horisontalLookingDirection == HorisontalLookingDirection.Right) {
 				horisontal = "r";
 			}
 			
