@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Sprites\PissFairySprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\PlayerCharacterSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\SlimeBallSprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\ZombieSprite.cs" />
      <Compile Include="Assets\Scripts\Weapons\DroppedItem.cs" />
      <Compile Include="Assets\Scripts\Weapons\Explosion.cs" />
      <Compile Include="Assets\Scripts\Weapons\Explosive.cs" />
