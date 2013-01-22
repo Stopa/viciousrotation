@@ -45,11 +45,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Character\AI Behaviour\GhostBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Character\AI Behaviour\SlimeBallBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Character\AI Behaviour\ZombieBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\BaseCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\BaseEnemyCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\FriendlyCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerCharacter.cs" />
-     <Compile Include="Assets\Scripts\Character\SlimeBallBehaviour.cs" />
      <Compile Include="Assets\Scripts\DayCycle.cs" />
      <Compile Include="Assets\Scripts\DialogueSystem\DialogueDisplay.cs" />
      <Compile Include="Assets\Scripts\HealthDisplay.cs" />
@@ -60,6 +62,7 @@
      <Compile Include="Assets\Scripts\SpriteManager\SpriteManager.cs" />
      <Compile Include="Assets\Scripts\Sprites\BaseSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\DoctorSprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\GhostSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\GravediggerSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\PissFairySprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\PlayerCharacterSprite.cs" />

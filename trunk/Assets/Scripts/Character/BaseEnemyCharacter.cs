@@ -25,7 +25,7 @@ public class BaseEnemyCharacter: BaseCharacter {
 		GameObject go = GameObject.FindGameObjectWithTag("Player");
 		_target = go.transform;
 		_player = go.GetComponent("PlayerCharacter") as PlayerCharacter;
-		sprite = (BaseSprite)gameObject.GetComponent("SlimeBallSprite");
+		sprite = (BaseSprite)gameObject.GetComponent("BaseSprite");
 		_attackTimer = 0;
 		_random = new System.Random();
 	}
