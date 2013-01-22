@@ -46,9 +46,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Character\BaseCharacter.cs" />
-     <Compile Include="Assets\Scripts\Character\EnemyCharacter.cs" />
+     <Compile Include="Assets\Scripts\Character\BaseEnemyCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\FriendlyCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerCharacter.cs" />
+     <Compile Include="Assets\Scripts\Character\SlimeBallBehaviour.cs" />
      <Compile Include="Assets\Scripts\DayCycle.cs" />
      <Compile Include="Assets\Scripts\DialogueSystem\DialogueDisplay.cs" />
      <Compile Include="Assets\Scripts\HealthDisplay.cs" />

@@ -6,19 +6,16 @@ public class PlayerCharacter: BaseCharacter {
 	public CharacterController _playerCharacterController;
 	private float _attackTimer;
 	private Vector3 _clickPoint;
-	private BaseSprite _sprite;
-	private HorisontalLookingDirection _horisontalLookingDirection;
-	private VerticalLookingDirection _verticalLookingDirection;
-	private ActionTaken _actionTaken;
 	
 	public Inventory _inventory;
+	private Weapon _curWeapon;
 	private ArrayList _weapons;
 	public Explosive _curBomb;
 	
-	//feel free to refactor it to something better if you get an idea
-	enum HorisontalLookingDirection {Left, Middle, Right};
-	enum VerticalLookingDirection {Down, Middle, Up};
-	enum ActionTaken {Idle, Walk, MeleeAttack, RangedAttack} // add other possible actions
+	public Weapon Weapon {
+		get{ return _curWeapon;}
+		set{ _curWeapon = value;}	
+	}
 	
 	void Awake(){
 		InitAttributes("P. McPlayer", 4, 100,100);
@@ -280,6 +277,18 @@ public class PlayerCharacter: BaseCharacter {
 		} else {
 			_verticalLookingDirection = VerticalLookingDirection.Middle;
 		}
+	}
+	#endregion
+	
+	#region attacks
+	public void Attack(GameObject target) {
+		float distance = Vector3.Distance(target.transform.position, transform.position);
+		
+		if(distance <= _curWeapon._range){	
+			Debug.Log("Distance " + distance + ". Damage to " +target.tag + ": " + _curWeapon._damage);
+			BaseCharacter bc = (BaseCharacter)target.GetComponent("BaseCharacter");
+			bc.AdjustCurrentHealth(-(_curWeapon._damage));
+		}		
 	}
 	#endregion
 }

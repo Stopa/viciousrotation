@@ -7,7 +7,17 @@ public class BaseCharacter: MonoBehaviour {
 	private int _moveSpeed;
 	private int _maxHealth = 100;
 	private int _curHealth = 100;
-	private Weapon _curWeapon;
+	protected HorisontalLookingDirection _horisontalLookingDirection;
+	protected VerticalLookingDirection _verticalLookingDirection;
+	protected ActionTaken _actionTaken;
+	protected BaseSprite _sprite;
+	
+	#region enums
+	//feel free to refactor it to something better if you get an idea
+	protected enum HorisontalLookingDirection {Left, Middle, Right};
+	protected enum VerticalLookingDirection {Down, Middle, Up};
+	protected enum ActionTaken {Idle, Walk, MeleeAttack, RangedAttack} // add other possible actions
+	#endregion
 	
 	#region get set
 	public string Name {
@@ -26,10 +36,6 @@ public class BaseCharacter: MonoBehaviour {
 		get{ return _maxHealth;}
 		set{ _maxHealth = value;}	
 	}
-	public Weapon Weapon {
-		get{ return _curWeapon;}
-		set{ _curWeapon = value;}	
-	}
 	#endregion
 	
 	void Awake() {
@@ -37,7 +43,6 @@ public class BaseCharacter: MonoBehaviour {
 		_moveSpeed = 0;
 		_maxHealth = 0;
 		_curHealth = 0;
-		_curWeapon = null;
 	}
 	
 	void Start() {	
@@ -58,18 +63,6 @@ public class BaseCharacter: MonoBehaviour {
 			_maxHealth = 1;		
 	}
 	
-	#endregion
-	
-	#region attacks
-	public void Attack(GameObject target) {
-		float distance = Vector3.Distance(target.transform.position, transform.position);
-		
-		if(distance <= _curWeapon._range){	
-			Debug.Log("Distance " + distance + ". Damage to " +target.tag + ": " + _curWeapon._damage);
-			BaseCharacter bc = (BaseCharacter)target.GetComponent("BaseCharacter");
-			bc.AdjustCurrentHealth(-(_curWeapon._damage));
-		}		
-	}
 	#endregion
 	
 	public void InitAttributes(string name, int speed, int maxHealth, int health) {
