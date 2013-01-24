@@ -15,9 +15,11 @@ public class BaseEnemyCharacter: BaseCharacter {
 	protected BaseSprite sprite;
 	private System.Random _random;
 	private PlayerCharacter _player;
+	private bool dead;
 	
 	void Awake(){
 		base.InitAttributes("Zombie Cube", 1, 20, 20);
+		dead = false;
 	}
 
 	// Use this for initialization
@@ -36,9 +38,12 @@ public class BaseEnemyCharacter: BaseCharacter {
 			_attackTimer -= Time.deltaTime;
 		}
 		if(Health <= 0) {
-			DropItem();
-			Destroy(gameObject);
-			sprite.DestroySprite();
+			if(!dead) {
+				sprite.sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(DeathAnimationComplete));
+				_actionTaken = ActionTaken.Death;
+				dead = true;
+			}
+			UpdateAnimations();
 			return;
 		}
 		float distance = Vector3.Distance(_target.position, transform.position);
@@ -89,6 +94,12 @@ public class BaseEnemyCharacter: BaseCharacter {
 	
 	#region sprites
 	protected virtual void UpdateAnimations() {}
+	
+	void DeathAnimationComplete() {
+		DropItem();
+		Destroy(gameObject);
+		sprite.DestroySprite();
+	}
 	#endregion
 	
 	public void InitAttributes(string name, int speed, int maxHealth, float aggroDistance, int minDmg, int maxDmg, float accuracy, float atkRange, float atkSpd) {

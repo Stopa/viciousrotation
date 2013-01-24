@@ -5,7 +5,7 @@ public class GhostBehaviour : BaseEnemyCharacter
 {
 
 	void Awake() {
-		InitAttributes("Ghost", 2, 25, 20, 4, 15, 0.7f, 5, 1);
+		InitAttributes("Ghost", 2, 10, 20, 4, 15, 0.7f, 5, 1);
 	}
 	
 	protected override void UpdateAnimations() {
@@ -15,6 +15,8 @@ public class GhostBehaviour : BaseEnemyCharacter
 			animationName = "attack_";
 		} else if(_actionTaken == ActionTaken.Walk) {
 			animationName = "walk_";
+		} else if(_actionTaken == ActionTaken.Death) {
+			animationName = "death_";
 		} else {
 			animationName = "idle_";
 		}
@@ -26,7 +28,11 @@ public class GhostBehaviour : BaseEnemyCharacter
 		}
 		
 		if(sprite.IsAnimationNotRunning(animationName)) {
-			sprite.PlayAnimationIfCanInterrupt(animationName);
+			if(_actionTaken == ActionTaken.Death) {
+				sprite.PlayAnimation(animationName);
+			} else {
+				sprite.PlayAnimationIfCanInterrupt(animationName);
+			}
 		}
 	}
 	
