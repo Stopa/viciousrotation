@@ -16,7 +16,7 @@ public class BaseCharacter: MonoBehaviour {
 	//feel free to refactor it to something better if you get an idea
 	protected enum HorisontalLookingDirection {Left, Middle, Right};
 	protected enum VerticalLookingDirection {Down, Middle, Up};
-	protected enum ActionTaken {Idle, Walk, MeleeAttack, RangedAttack} // add other possible actions
+	protected enum ActionTaken {Idle, Walk, MeleeAttack, RangedAttack, Death} // add other possible actions
 	#endregion
 	
 	#region get set

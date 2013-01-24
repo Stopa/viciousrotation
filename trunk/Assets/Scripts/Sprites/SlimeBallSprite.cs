@@ -17,5 +17,6 @@ public class SlimeBallSprite : BaseSprite {
 		
 		AddAnimation("move", spriteUVSize, 32, 48, 5);
 		AddAnimation("idle", spriteUVSize, 32, 48, 1);
+		AddAnimation("death", spriteUVSize, 32, 48, 1, false);
 	}
 }

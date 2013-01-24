@@ -9,8 +9,8 @@ public class BaseSprite : MonoBehaviour {
 	public int spriteWidth;
 	public int spriteHeight;
 	public string defaultAnimationName;
+	public Sprite sprite;
 	
-	protected Sprite sprite;
 	protected SpriteManager spriteManager;
 	protected bool _animationRunning;
 
