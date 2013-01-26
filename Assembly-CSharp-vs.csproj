@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\GhostBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Character\AI Behaviour\PassiveBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\SlimeBallBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\ZombieBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\BaseCharacter.cs" />
@@ -57,6 +58,7 @@
      <Compile Include="Assets\Scripts\HealthDisplay.cs" />
      <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Scripts\InventoryDisplay.cs" />
+     <Compile Include="Assets\Scripts\Spawner\BaseSpawner.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\LinkedSpriteManager.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\Sprite.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\SpriteManager.cs" />
