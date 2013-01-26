@@ -48,6 +48,10 @@ public class BaseEnemyCharacter: BaseCharacter {
 			UpdateAnimations();
 			return;
 		}
+		if(!_existingNPC) {
+			UpdateAnimations();
+			return;
+		}
 		float distance = Vector3.Distance(_target.position, transform.position);
 		if(distance <= _attackRange && _attackTimer <= 0) {
 			_attackTimer = _attackSpeed;
