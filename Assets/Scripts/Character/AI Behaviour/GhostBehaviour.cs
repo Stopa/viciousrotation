@@ -28,7 +28,10 @@ public class GhostBehaviour : BaseEnemyCharacter
 		}
 		
 		if(sprite.IsAnimationNotRunning(animationName)) {
-			if(_actionTaken == ActionTaken.Death) {
+			if(!_existingNPC) {
+				sprite.PlayAnimation("spawn");
+				_existingNPC = true;
+			} else if(_actionTaken == ActionTaken.Death) {
 				sprite.PlayAnimation(animationName);
 			} else {
 				sprite.PlayAnimationIfCanInterrupt(animationName);

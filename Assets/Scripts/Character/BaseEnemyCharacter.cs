@@ -11,15 +11,17 @@ public class BaseEnemyCharacter: BaseCharacter {
 	public float _accuracyPercent;
 	public float _attackRange;
 	public float _attackSpeed;
-	private float _attackTimer;
+	
 	protected BaseSprite sprite;
+	protected bool _existingNPC;
+	
+	private float _attackTimer;
 	private System.Random _random;
 	private PlayerCharacter _player;
 	private bool dead;
 	
 	void Awake(){
 		base.InitAttributes("Zombie Cube", 1, 20, 20);
-		dead = false;
 	}
 
 	// Use this for initialization

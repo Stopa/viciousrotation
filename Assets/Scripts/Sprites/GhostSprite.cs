@@ -10,7 +10,6 @@ public class GhostSprite : BaseSprite
 		this.spriteWorldWidth = 4.47f;
 		this.spriteWidth = 64;
 		this.spriteHeight = 96;
-		this.defaultAnimationName = "idle_l";
 	}
 	
 	protected override void DefineSpriteAnimations() {
@@ -27,6 +26,8 @@ public class GhostSprite : BaseSprite
 		
 		AddAnimation("death_l", spriteUVSize, 0, 288, 10, false);
 		AddAnimation("death_r", spriteUVSize, 0, 384, 10, false);
+		
+		AddAnimation("spawn", spriteUVSize, 0, 480, 10, false);
 	}
 }
 

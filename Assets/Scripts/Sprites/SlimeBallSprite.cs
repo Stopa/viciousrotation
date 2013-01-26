@@ -9,7 +9,6 @@ public class SlimeBallSprite : BaseSprite {
 		this.spriteWorldWidth = 2f;
 		this.spriteWidth = 32;
 		this.spriteHeight = 32;
-		this.defaultAnimationName = "idle";
 	}
 	
 	protected override void DefineSpriteAnimations() {
