@@ -98,9 +98,10 @@ public class PlayerCharacter: BaseCharacter {
 		}
 		//THROW BOMB
 		else if(Input.GetButtonDown("Fire2")) {	
-			Application.LoadLevel("haldjamets");
+			//Application.LoadLevel("haldjamets");
 			Explosive e = _inventory.GetEquippedExplosive();
 			if(e != null) {
+				_actionTaken = ActionTaken.RangedAttack;
 				Debug.Log("Throwing bomb: " + e._name);
 				GameObject target = FindClickTarget();
 				GameObject explosion = (GameObject)Instantiate(Resources.Load("Prefabs/MyExplosion"), _clickPoint, Quaternion.identity);
