@@ -65,6 +65,10 @@ public class BaseSprite : MonoBehaviour {
 	}
 	
 	void AnimationCompleted() {
+		BaseEnemyCharacter charBehaviour = (BaseEnemyCharacter)gameObject.GetComponent("BaseEnemyCharacter");
+		if(charBehaviour && !charBehaviour.Existing) {
+			charBehaviour.Existing = true;
+		}
 		_animationRunning = false;
 	}
 }

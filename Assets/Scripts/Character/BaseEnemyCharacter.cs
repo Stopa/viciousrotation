@@ -20,6 +20,11 @@ public class BaseEnemyCharacter: BaseCharacter {
 	private PlayerCharacter _player;
 	private bool dead;
 	
+	public bool Existing {
+		get{ return _existingNPC; }
+		set{ _existingNPC = value; }
+	}
+	
 	void Awake(){
 		base.InitAttributes("Zombie Cube", 1, 20, 20);
 	}

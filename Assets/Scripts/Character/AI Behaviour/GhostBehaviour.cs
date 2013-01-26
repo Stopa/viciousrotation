@@ -30,17 +30,12 @@ public class GhostBehaviour : BaseEnemyCharacter
 		if(sprite.IsAnimationNotRunning(animationName)) {
 			if(!_existingNPC && sprite.IsAnimationNotRunning("spawn")) {
 				sprite.PlayAnimation("spawn");
-				sprite.sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(ActivateCharacter));
 			} else if(_actionTaken == ActionTaken.Death) {
 				sprite.PlayAnimation(animationName);
 			} else {
 				sprite.PlayAnimationIfCanInterrupt(animationName);
 			}
 		}
-	}
-	
-	void ActivateCharacter() {
-		_existingNPC = true;
 	}
 	
 }
