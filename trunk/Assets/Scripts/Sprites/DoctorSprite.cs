@@ -9,7 +9,6 @@ public class DoctorSprite : BaseSprite {
 		this.spriteWorldWidth = 4.47f;
 		this.spriteWidth = 64;
 		this.spriteHeight = 96;
-		this.defaultAnimationName = "idle_l";
 	}
 
 	protected override void DefineSpriteAnimations() {
