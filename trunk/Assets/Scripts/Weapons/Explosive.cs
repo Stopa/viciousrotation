@@ -4,7 +4,6 @@ using System.Collections;
 public class Explosive: Weapon {
 	
 	public float _area;
-	public int _amount;
 	
 	public Explosive(string name, string type, float range, float area, int damage, float cooldown) {
 		_name = name;
