@@ -9,6 +9,10 @@ public class ZombieBehaviour : BaseEnemyCharacter
 	}
 	
 	protected override void UpdateAnimations() {
+		BaseEnemyCharacter charBehaviour = (BaseEnemyCharacter)gameObject.GetComponent("BaseEnemyCharacter");
+		if(charBehaviour && !charBehaviour.Existing) {
+			charBehaviour.Existing = true;
+		}
 		string animationName = "";
 		
 		if(_actionTaken == ActionTaken.MeleeAttack) {
