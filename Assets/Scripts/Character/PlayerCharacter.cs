@@ -41,11 +41,12 @@ public class PlayerCharacter: BaseCharacter {
 		//MOVEMENT
 		Vector3 moveDirection = Vector3.zero;
 		
-		if(_playerCharacterController.isGrounded) {
-			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-	        moveDirection = transform.TransformDirection(moveDirection);
-        	moveDirection *= 10;
-		}
+		// TODO - need to control in a better way - this control made animations jerky on Unity Terrain
+		//if(_playerCharacterController.isGrounded) {
+		moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        moveDirection = transform.TransformDirection(moveDirection);
+    	moveDirection *= 10;
+		//}
 		moveDirection.y -= 20 * Time.deltaTime;
 		_playerCharacterController.Move(moveDirection * Time.deltaTime);
 		
