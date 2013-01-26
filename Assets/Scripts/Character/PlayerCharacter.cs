@@ -8,10 +8,8 @@ public class PlayerCharacter: BaseCharacter {
 	private Vector3 _clickPoint;
 	
 	public Inventory _inventory;
-	private Weapon _curWeapon;
 	private ArrayList _weapons;
-	public Explosive _curBomb;
-	
+	private Weapon _curWeapon;
 	public Texture2D _portrait;
 	
 	public Weapon Weapon {
@@ -97,12 +95,14 @@ public class PlayerCharacter: BaseCharacter {
 		}
 		//THROW BOMB
 		else if(Input.GetButtonDown("Fire2")) {	
-			if(_curBomb._amount > 0) {
-				Debug.Log("Throwing bomb: " + _curBomb._name);
+			Explosive e = _inventory.GetEquippedExplosive();
+			if(e != null) {
+				Debug.Log("Throwing bomb: " + e._name);
 				GameObject target = FindClickTarget();
 				GameObject explosion = (GameObject)Instantiate(Resources.Load("Prefabs/MyExplosion"), _clickPoint, Quaternion.identity);
 				Explosion expScript = explosion.GetComponent("Explosion") as Explosion;
 				expScript._damage = 10;
+				e._amount--;
 			}
 		}
 		
@@ -126,9 +126,8 @@ public class PlayerCharacter: BaseCharacter {
 		
 		Explosive e = new Explosive("bomb_1", "bomb", 15.0f, 4.0f, 15, 2.0f);
 		e._icon = Resources.Load("Item/Icon/bomb_1") as Texture2D;
-		_inventory.AddItem(e);
-		
-		_curBomb = e;
+		e._amount = 3;
+		_inventory.AddItem(e);		
 	}
 	
 	private void InitItems() {
@@ -163,14 +162,6 @@ public class PlayerCharacter: BaseCharacter {
 		_attackTimer = 0;
 		Weapon = _weapons[index] as Weapon;
 		Debug.Log("Changed weapon to: " + Weapon._name + ", damage: " + Weapon._damage);
-	}
-
-	/*
-	 * Change equipped bomb
-	 */
-	private void ChangeBomb(Explosive e) {
-		_curBomb = e;	
-		Debug.Log("Changed bomb to: " + e._name + ", damage: " + e._damage);
 	}
 	
 	/*

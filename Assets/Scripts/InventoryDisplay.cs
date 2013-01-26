@@ -14,6 +14,7 @@ public class InventoryDisplay : MonoBehaviour {
 	private Rect _inventoryWindow = new Rect(100,200,400,250);
 	private bool _canCraftItem;
 	private Formula  _selectedFormula;
+	private Explosive _selectedExplosive;
 	
 	//clock 
 	public Texture2D _clockBackground;
@@ -63,13 +64,10 @@ public class InventoryDisplay : MonoBehaviour {
 			DisplayClock();
 			
 			//OTHER
-			Texture2D weapIcon = _player.Weapon._icon;
-			Texture2D bombIcon = _player._curBomb._icon;
-			
-			if(weapIcon != null)
-				GUI.DrawTexture(new Rect(0,128,64,64), weapIcon);
-			if(bombIcon != null)
-				GUI.DrawTexture(new Rect(0,128+64,64,64), bombIcon);
+			if(_player.Weapon != null)
+				GUI.DrawTexture(new Rect(0,128,64,64), _player.Weapon._icon);
+			if(_inventory.GetEquippedExplosive() != null)
+				GUI.DrawTexture(new Rect(0,128+64,64,64), _inventory.GetEquippedExplosive()._icon);
 			
 			if(_showInventory) {
 				_inventoryWindow = GUI.Window(1, _inventoryWindow, InventoryWindow, "Inventory");
@@ -90,10 +88,13 @@ public class InventoryDisplay : MonoBehaviour {
 		
 		GUI.enabled = _canCraftItem;
 	    if (GUI.Button(new Rect(10, 200, 50, 30), "Craft!"))
-             CraftItemBtnPressed();
+             CraftBtnPressed();
 		GUI.enabled = true;
+		
+		if (GUI.Button(new Rect(100, 200, 50, 30), "Equip!"))
+             EquipBtnPressed();
 	}
-	
+
 	private void DisplayItems() {
 		ArrayList bombs = _inventory.Bombs;
 		ArrayList formulas = _inventory.Formulas;
@@ -117,17 +118,25 @@ public class InventoryDisplay : MonoBehaviour {
 		
 		y += 60;
 		x = 0;
-		foreach(Explosive b in bombs) {
-			GUI.DrawTexture(new Rect(x, y, 64, 64), b._icon);
+		foreach(Explosive e in bombs) {
+			if (GUI.Button(new Rect(x, y, 64, 64), e._icon)) {
+				_selectedExplosive = e;
+			}
+			GUI.Label(new Rect(x+5, y+10, 30, 30), e._amount.ToString());
 			x+= 70;
 		} 
 	}
 	
 	#endregion
 
-	private void CraftItemBtnPressed() {
+	private void CraftBtnPressed() {
 		_inventory.CraftItem(_selectedFormula);
 		_canCraftItem = _inventory.CheckIngredients(_selectedFormula);
+	}
+	
+	private void EquipBtnPressed() {
+		if(_selectedExplosive != null)
+			_inventory.EquipItem(_selectedExplosive);
 	}
 	
 	private void FormulaBtnPressed(Formula f) {
