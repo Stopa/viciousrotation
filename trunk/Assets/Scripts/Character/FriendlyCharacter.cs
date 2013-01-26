@@ -5,7 +5,8 @@ public class FriendlyCharacter: MonoBehaviour {
 	private string _name;
 	private GameObject _player;
 	private float _talkDistance;
-	
+	public Texture2D _portrait;
+		
 	void Start() {
 		_player = GameObject.FindGameObjectWithTag("Player");
 		_talkDistance = 7.0f;

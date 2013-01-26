@@ -12,6 +12,8 @@ public class PlayerCharacter: BaseCharacter {
 	private ArrayList _weapons;
 	public Explosive _curBomb;
 	
+	public Texture2D _portrait;
+	
 	public Weapon Weapon {
 		get{ return _curWeapon;}
 		set{ _curWeapon = value;}	
@@ -85,6 +87,9 @@ public class PlayerCharacter: BaseCharacter {
 				}
 				else if(target.tag == "friendly") {
 					Debug.Log("Hit friendly: " + target.name);
+					DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
+					FriendlyCharacter ch = target.GetComponent("FriendlyCharacter") as FriendlyCharacter;
+					disp.OpenDisplay(ch);
 				}
 			}
 			//TODO - change the direction of the sprite so that the character looks towards clicked point
@@ -93,6 +98,7 @@ public class PlayerCharacter: BaseCharacter {
 		//THROW BOMB
 		else if(Input.GetButtonDown("Fire2")) {	
 			if(_curBomb._amount > 0) {
+				Debug.Log("Throwing bomb: " + _curBomb._name);
 				GameObject target = FindClickTarget();
 				GameObject explosion = (GameObject)Instantiate(Resources.Load("Prefabs/MyExplosion"), _clickPoint, Quaternion.identity);
 				Explosion expScript = explosion.GetComponent("Explosion") as Explosion;
