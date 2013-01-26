@@ -18,6 +18,8 @@ public class PlayerCharacter: BaseCharacter {
 	}
 	
 	void Awake(){
+		DontDestroyOnLoad(gameObject);
+		
 		InitAttributes("P. McPlayer", 4, 100,100);
 		_inventory = new Inventory();
 		InitWeapons();
@@ -95,6 +97,7 @@ public class PlayerCharacter: BaseCharacter {
 		}
 		//THROW BOMB
 		else if(Input.GetButtonDown("Fire2")) {	
+			Application.LoadLevel("haldjamets");
 			Explosive e = _inventory.GetEquippedExplosive();
 			if(e != null) {
 				Debug.Log("Throwing bomb: " + e._name);

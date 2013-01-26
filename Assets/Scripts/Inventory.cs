@@ -82,6 +82,7 @@ public class Inventory {
 		}
 		
 		else if (item.GetType() == typeof(Explosive)) {
+			Debug.Log(_bombs.IndexOf(item as Explosive));
 			existingItem = CheckIfContains(_bombs, item);
 			if(existingItem != null)
 				existingItem._amount += item._amount;
