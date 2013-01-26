@@ -5,6 +5,9 @@ public class CameraControl : MonoBehaviour {
 	
 	public GameObject _player;
 	
+	void Awake() {
+		DontDestroyOnLoad(gameObject);
+	}
 	void Start(){
 
 	}

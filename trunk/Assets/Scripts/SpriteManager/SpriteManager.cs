@@ -265,6 +265,9 @@ public class SpriteManager : MonoBehaviour
  
 	void Awake()
 	{
+		if(gameObject.name == "PlayerCharacterSpriteManager")
+ 			DontDestroyOnLoad(transform.gameObject);
+
 		gameObject.AddComponent("MeshFilter");
 		gameObject.AddComponent("MeshRenderer");
  

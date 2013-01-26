@@ -22,7 +22,7 @@ public class LinkedSpriteManager : SpriteManager
 	Vector3 pos;
 	Sprite s;
  
- 
+
 	// Use this for initialization
 	void Start () 
 	{
