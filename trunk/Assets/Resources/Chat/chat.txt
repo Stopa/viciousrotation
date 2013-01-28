@@ -1,0 +1,43 @@
+{
+	"chat": [
+		{
+			"text": "here is my question to you",
+			"options": [
+				{
+					"text": "and here is my answer",
+					"goto": 1
+				},
+				{
+					"text": "here is another answer",
+					"goto": 2
+				},
+				{
+					"text": "and yet another one",
+					"goto": -1
+				},
+				{
+					"text": "answers are many, question is one",
+					"goto": -2
+				}
+			]
+		},
+		{
+			"text": "YOU OPENED MY MOST SECRET QUESTION!",
+			"options": [
+				{
+					"text": "NOW CLICK THIS",
+					"goto": -1
+				}
+			]
+		},
+		{
+			"text": "THIS IS MY SECOND QUESTION",
+			"options": [
+				{
+					"text": "OH NOES",
+					"goto": -2
+				}
+			]
+		}
+	]
+}
