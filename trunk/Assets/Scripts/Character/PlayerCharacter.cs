@@ -206,13 +206,14 @@ public class PlayerCharacter: BaseCharacter {
 	
 	private void LookTowards(Vector3 position) {
 		Vector3 myPosition = gameObject.transform.position;
+		Vector2 difference = new Vector2(Mathf.Abs(myPosition.x-position.x), Mathf.Abs (myPosition.z-position.z));
 		
-		if(position.x > myPosition.x) {
+		if (difference.y > difference.x*2) {
+			_horisontalLookingDirection = HorisontalLookingDirection.Middle;	
+		} else if(position.x > myPosition.x) {
 			_horisontalLookingDirection = HorisontalLookingDirection.Right;
 		} else if(position.x < myPosition.x) {
 			_horisontalLookingDirection = HorisontalLookingDirection.Left;
-		} else {
-			_horisontalLookingDirection = HorisontalLookingDirection.Middle;
 		}
 		
 		if(position.z > myPosition.z) {
