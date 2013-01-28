@@ -97,12 +97,8 @@ public class Inventory {
 		}
 	}
 	
-	public void EquipItem(Item item) {
-		if (item.GetType() == typeof(Weapon)) {
-		
-		}
-		
-		else if (item.GetType() == typeof(Explosive)) {
+	public void EquipItem(Item item) {		
+		if (item.GetType() == typeof(Explosive)) {
 			_equippedIndex = _bombs.IndexOf(item as Explosive);
 		}
 	}
