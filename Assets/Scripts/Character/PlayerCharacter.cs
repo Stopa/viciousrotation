@@ -239,8 +239,10 @@ public class PlayerCharacter: BaseCharacter {
 					}
 					else if(target.tag == "friendly") {
 						DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
-						FriendlyCharacter ch = target.GetComponent("FriendlyCharacter") as FriendlyCharacter;
-						disp.OpenDisplay(ch);
+						BaseNPCChat ch = target.GetComponent("BaseNPCChat") as BaseNPCChat;
+						if(Vector3.Distance(target.transform.position, gameObject.transform.position) <= ch.TalkDistance) {
+							disp.OpenDisplay(ch);
+						}
 					}
 				}
 				//TODO - change the direction of the sprite so that the character looks towards clicked point
