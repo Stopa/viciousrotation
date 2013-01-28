@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Character\AI Behaviour\EvilPissFairyBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\GhostBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\PassiveBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\SlimeBallBehaviour.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Scripts\SpriteManager\SpriteManager.cs" />
      <Compile Include="Assets\Scripts\Sprites\BaseSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\DoctorSprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\EvilPissFairySprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\GhostSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\GravediggerSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\PissFairySprite.cs" />
