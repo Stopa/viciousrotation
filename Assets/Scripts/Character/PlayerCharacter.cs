@@ -6,6 +6,7 @@ public class PlayerCharacter: BaseCharacter {
 	public CharacterController _playerCharacterController;
 	private float _attackTimer;
 	private Vector3 _clickPoint;
+	private bool _canAttack;
 	
 	public Inventory _inventory;
 	private ArrayList _weapons;
@@ -33,6 +34,8 @@ public class PlayerCharacter: BaseCharacter {
 		_attackTimer = 0;
 		
 		_sprite = (BaseSprite)gameObject.GetComponent("PlayerCharacterSprite");
+		
+		_canAttack = true;
 	}
 	
 	// Update is called once per frame
@@ -71,45 +74,10 @@ public class PlayerCharacter: BaseCharacter {
 		
 		//ATTACK
 		if(_attackTimer > 0)
-			_attackTimer -= Time.deltaTime;
-		//TEMP change weapon		
-		if(Input.GetKeyUp(KeyCode.C)) {
-			ChangeWeapon();
-		}
+			_attackTimer -= Time.deltaTime;		
+		
 		//TEMP attack
-		if(Input.GetButtonDown("Fire1")) {	
-			GameObject target = FindClickTarget();
-			
-			if(target != null) {
-				if(target.tag == "enemy" && _attackTimer <= 0) {
-					Debug.Log("Hit enemy: " + target.name);
-					Attack(target);
-					_attackTimer = Weapon._cooldown;
-				}
-				else if(target.tag == "friendly") {
-					Debug.Log("Hit friendly: " + target.name);
-					DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
-					FriendlyCharacter ch = target.GetComponent("FriendlyCharacter") as FriendlyCharacter;
-					disp.OpenDisplay(ch);
-				}
-			}
-			//TODO - change the direction of the sprite so that the character looks towards clicked point
-			_actionTaken = ActionTaken.MeleeAttack;
-		}
-		//THROW BOMB
-		else if(Input.GetButtonDown("Fire2")) {	
-			//Application.LoadLevel("haldjamets");
-			Explosive e = _inventory.GetEquippedExplosive();
-			if(e != null) {
-				_actionTaken = ActionTaken.RangedAttack;
-				Debug.Log("Throwing bomb: " + e._name);
-				GameObject target = FindClickTarget();
-				GameObject explosion = (GameObject)Instantiate(Resources.Load("Prefabs/MyExplosion"), _clickPoint, Quaternion.identity);
-				Explosion expScript = explosion.GetComponent("Explosion") as Explosion;
-				expScript._damage = 10;
-				e._amount--;
-			}
-		}
+		CheckInput();
 		
 		UpdateAnimations();
 	}
@@ -176,32 +144,7 @@ public class PlayerCharacter: BaseCharacter {
 		_inventory.AddItem(item);
 	}
 	
-	private GameObject FindClickTarget(){
-		Vector3 playerPos = transform.position;
-		playerPos.y = 0;
-		Plane ground = new Plane(Vector3.up, playerPos);
-		
-		Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-		
-		//wtf is the distance supposed to be??
-		float dist = 100.0f;
-		
-		//if clicked on ground, get clickpoint
-		if(ground.Raycast(cameraRay, out dist)){
-			_clickPoint = new Vector3(cameraRay.GetPoint(dist).x, playerPos.y, cameraRay.GetPoint(dist).z);
-         	//Debug.Log("clickpoint " + _clickPoint);
-			LookTowards(_clickPoint);
-		}
-		
-		//if clicked on another object
-		RaycastHit hit;
-		if(Physics.Raycast(cameraRay, out hit, dist)) {
-			//Debug.Log(hit.distance);
-			return hit.collider.gameObject;
-		}
-		
-		return null;
-	}
+
 	
 	#region graphics
 	private void UpdateAnimations() {
@@ -282,7 +225,79 @@ public class PlayerCharacter: BaseCharacter {
 	}
 	#endregion
 	
-	#region attacks
+	#region interaction
+	private void CheckInput() {
+		if(_canAttack) {
+			if(Input.GetButtonDown("Fire1")) {	
+				GameObject target = FindClickTarget();
+				
+				if(target != null) {
+					if(target.tag == "enemy" && _attackTimer <= 0) {
+						Debug.Log("Hit enemy: " + target.name);
+						Attack(target);
+						_attackTimer = Weapon._cooldown;
+					}
+					else if(target.tag == "friendly") {
+						DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
+						FriendlyCharacter ch = target.GetComponent("FriendlyCharacter") as FriendlyCharacter;
+						disp.OpenDisplay(ch);
+					}
+				}
+				//TODO - change the direction of the sprite so that the character looks towards clicked point
+				_actionTaken = ActionTaken.MeleeAttack;
+			}
+	
+			else if(Input.GetButtonDown("Fire2")) {	
+				Explosive e = _inventory.GetEquippedExplosive();
+				if(e != null) {
+					_actionTaken = ActionTaken.RangedAttack;
+					Debug.Log("Throwing bomb: " + e._name);
+					GameObject target = FindClickTarget();
+					GameObject explosion = (GameObject)Instantiate(Resources.Load("Prefabs/MyExplosion"), _clickPoint, Quaternion.identity);
+					Explosion expScript = explosion.GetComponent("Explosion") as Explosion;
+					expScript._damage = 10;
+					e._amount--;
+				}
+			}
+		}
+				
+		if(Input.GetKeyUp(KeyCode.C)) {
+			ChangeWeapon();
+		}		
+		if(Input.GetKeyUp(KeyCode.I)) {
+			DisplayManager disp = gameObject.GetComponent("DisplayManager") as DisplayManager;			
+			disp.ChangeDisplayState("inventory");
+			_canAttack = !_canAttack;
+		}
+	}
+	
+	private GameObject FindClickTarget() {
+		Vector3 playerPos = transform.position;
+		playerPos.y = 0;
+		Plane ground = new Plane(Vector3.up, playerPos);
+		
+		Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+		
+		//wtf is the distance supposed to be??
+		float dist = 100.0f;
+		
+		//if clicked on ground, get clickpoint
+		if(ground.Raycast(cameraRay, out dist)){
+			_clickPoint = new Vector3(cameraRay.GetPoint(dist).x, playerPos.y, cameraRay.GetPoint(dist).z);
+         	//Debug.Log("clickpoint " + _clickPoint);
+			LookTowards(_clickPoint);
+		}
+		
+		//if clicked on another object
+		RaycastHit hit;
+		if(Physics.Raycast(cameraRay, out hit, dist)) {
+			//Debug.Log(hit.distance);
+			return hit.collider.gameObject;
+		}
+		
+		return null;
+	}
+	
 	public void Attack(GameObject target) {
 		float distance = Vector3.Distance(target.transform.position, transform.position);
 		
