@@ -208,7 +208,7 @@ public class PlayerCharacter: BaseCharacter {
 		Vector3 myPosition = gameObject.transform.position;
 		Vector2 difference = new Vector2(Mathf.Abs(myPosition.x-position.x), Mathf.Abs (myPosition.z-position.z));
 		
-		if (difference.y > difference.x*2) {
+		if (difference.y > difference.x*4) {
 			_horisontalLookingDirection = HorisontalLookingDirection.Middle;	
 		} else if(position.x > myPosition.x) {
 			_horisontalLookingDirection = HorisontalLookingDirection.Right;
