@@ -8,9 +8,11 @@ public class CameraControl : MonoBehaviour {
 	void Awake() {
 		DontDestroyOnLoad(gameObject);
 	}
+	
 	void Start(){
 
 	}
+	
 	void LateUpdate () {
 		Vector3 pos = _player.transform.position;
 		pos.y = 0;
