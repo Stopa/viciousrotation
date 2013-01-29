@@ -37,17 +37,17 @@ public class DisplayManager : MonoBehaviour {
 		_showHud = true;
 		_showInventory = false;
 		
-		_healthBarLength = Screen.width / 2;
-		_player = gameObject.GetComponent("PlayerCharacter") as PlayerCharacter;			
+		_player = gameObject.GetComponent("PlayerCharacter") as PlayerCharacter;
+		
+		_healthBarLength = Screen.width / 2;		
 		_maxHealth = _player.MaxHealth;
 		_curHealth = _player.Health;
+		_cycleTime = 180;
+		UpdateClockSettings();
 		
 		_inventory = _player._inventory;
 		_canCraftItem = false;
-		_cycleTime = 180;
 		
-		UpdateClockSettings();
-		//images
 		_clockHand = Resources.Load("GUI/clockhand") as Texture2D;
 		_clockBackground = Resources.Load("GUI/clock") as Texture2D;
 		_healthBar = Resources.Load("GUI/healthbar") as Texture2D;
@@ -79,7 +79,8 @@ public class DisplayManager : MonoBehaviour {
 			_showInventory = !_showInventory;
 		else if(showObject == "hud")
 			_showHud = !_showHud;
-
+		else if(showObject == "dialogue")
+			_showDialogue = !_showDialogue;
 	}
 	
 	#region HUD	

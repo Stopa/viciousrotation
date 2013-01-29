@@ -60,6 +60,10 @@
      <Compile Include="Assets\Scripts\DisplayManager.cs" />
      <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Scripts\MiniJSON\MiniJSON.cs" />
+     <Compile Include="Assets\Scripts\LevelChanger.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Obsolete\HealthDisplay.cs" />
+     <Compile Include="Assets\Scripts\Obsolete\InventoryDisplay.cs" />
      <Compile Include="Assets\Scripts\Spawner\BaseSpawner.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\LinkedSpriteManager.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\Sprite.cs" />
