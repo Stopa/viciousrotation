@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\EvilPissFairyBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Character\AI Behaviour\ExplosionBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\GhostBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\PassiveBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\SlimeBallBehaviour.cs" />
@@ -58,6 +59,7 @@
      <Compile Include="Assets\Scripts\DayCycle.cs" />
      <Compile Include="Assets\Scripts\DialogueSystem\DialogueDisplay.cs" />
      <Compile Include="Assets\Scripts\DisplayManager.cs" />
+     <Compile Include="Assets\Scripts\DontDestroyObject.cs" />
      <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Scripts\LevelChanger.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
@@ -72,6 +74,7 @@
      <Compile Include="Assets\Scripts\Sprites\BaseSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\DoctorSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\EvilPissFairySprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\ExplosionSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\GhostSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\GravediggerSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\PissFairySprite.cs" />
