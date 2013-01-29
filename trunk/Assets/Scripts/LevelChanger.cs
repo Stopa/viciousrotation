@@ -12,6 +12,18 @@ public class LevelChanger: MonoBehaviour {
 	public Light _light;
 	public bool _canExit;
 	
+	void Awake() {
+		if (!GameObject.Find("PlayerCharacterSpriteManager")) {
+			Instantiate(Resources.Load("Prefabs/SpriteManagers/PlayerCharacterSpriteManager"), transform.position, Quaternion.identity);
+		}
+		if (!GameObject.FindGameObjectWithTag("Player")) {
+			Instantiate(Resources.Load("Prefabs/PlayerCharacterObject"), transform.position, Quaternion.identity);
+		}
+		if(!GameObject.FindGameObjectWithTag("GameCamera")) {
+			Instantiate(Resources.Load("Prefabs/GameCamera"), transform.position, Quaternion.identity);
+		}
+	}
+	
 	void Start() {
 		_showConfimation = false;
 		_light.enabled = false;
@@ -61,10 +73,10 @@ public class LevelChanger: MonoBehaviour {
 			Application.LoadLevel("haldjamets");
 		}
 		else if(curLevel == "doctor") {
-			//Application.LoadLevel("haldjamets");
+			Application.LoadLevel("haldjamets");
 		}
 		else if(curLevel == "haldjamets") {
-			Application.LoadLevel("graveyard");
+			Application.LoadLevel("doctor");
 		}
 	}
 	

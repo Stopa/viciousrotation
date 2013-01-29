@@ -3,14 +3,14 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour {
 	
-	public GameObject _player;
+	private GameObject _player;
 	
 	void Awake() {
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 	}
 	
 	void Start(){
-
+		_player = GameObject.FindWithTag("Player");
 	}
 	
 	void LateUpdate () {

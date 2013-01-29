@@ -28,7 +28,9 @@ public class DialogueDisplay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
+		
 		if(_showDialogue) {
+			Debug.Log("showing dialogue");
 			IList optionsList = (IList)((IDictionary)_chatObjects[_currentChatObject])["options"];
 			string[] selStrings = new string[optionsList.Count];
 			ArrayList options = new ArrayList();
@@ -83,6 +85,7 @@ public class DialogueDisplay : MonoBehaviour {
 	}
 	
 	public void OpenDisplay(BaseNPCChat partner) {
+		Debug.Log("opening dialogue");
 		_partner = partner;	
 		_showDialogue = true;
 		_currentChatObject = 0;
