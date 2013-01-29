@@ -3,13 +3,14 @@ using System.Collections;
 
 public class LevelChanger: MonoBehaviour {
 	
-	private bool _showConfimation;
 	private GUISkin _customSkin;
 	private string _char;
 	private string _quote;
 	private string _level;
 	private Texture2D _portrait;
 	public Light _light;
+	
+	private bool _showConfimation;
 	public bool _canExit;
 	
 	void Awake() {

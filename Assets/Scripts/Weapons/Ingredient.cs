@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Ingredient : Item {
 	
-	public Ingredient(string name) {
+	public Ingredient(int id, string name) {
+		_id = id;
 		_name = name;
-		_type = "ingredient";		
 	}
 }

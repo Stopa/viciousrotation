@@ -60,11 +60,22 @@ public class Inventory {
 		return true;
 	}
 		
-	private Explosive CreateExplosive(int id) {
-		Explosive e = new Explosive("bomb_2", "bomb", 15.0f, 4.0f, 15, 2.0f);
-		e._icon = Resources.Load("Item/Icon/bomb_2") as Texture2D;
-		e._amount = 1;
-		return e;
+	private Item CreateExplosive(int id) {
+		Item i = null;
+		if(id == 1) {
+			i = new Explosive(1,"bomb_1", 15.0f, 4.0f, 10, 3.0f);
+			i._icon = Resources.Load("Item/Icon/bomb_1") as Texture2D;
+		}
+		else if(id == 2) {
+			i = new Explosive(2,"bomb_2", 15.0f, 5.0f, 15, 3.0f);
+			i._icon = Resources.Load("Item/Icon/bomb_2") as Texture2D;
+		}
+		else if(id == 3) {
+			
+		}
+
+		i._amount = 1;
+		return i;
 	}
 	#endregion
 	
@@ -105,7 +116,7 @@ public class Inventory {
 	
 	public Item CheckIfContains(ArrayList list, Item item) {
 		foreach(Item i in list) {
-			if(i._name == item._name)
+			if(i._id == item._id)
 				return i;
 		}
 		return null;

@@ -5,27 +5,34 @@ public class DroppedItem : MonoBehaviour {
 	
 	private Ingredient _ingredient;
 	
+	void Awake() {
+		int id = Random.Range(1, 6);
+		Debug.Log(id);
+		if(id > 3) 
+			Destroy(gameObject);
+		else
+			CreateRandomItem(id);
+	}
 	// Use this for initialization
 	void Start () {	
-		CreateRandomItem();
 	}
 	
 	// Update is called once per frame
-	void Update () {	
-		
+	void Update () {		
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		if(other.gameObject.tag == "Player") {
-			PlayerCharacter pc = other.gameObject.GetComponent("PlayerCharacter") as PlayerCharacter;
-			pc.AddItem(_ingredient);
+		if(other.gameObject.tag == "Player" && _ingredient != null) {
+			PlayerCharacter player = other.gameObject.GetComponent("PlayerCharacter") as PlayerCharacter;
+			player.AddItem(_ingredient);
 			Destroy(gameObject);
 		}
     }
 	
-	void CreateRandomItem() {
-		_ingredient = new Ingredient("ingredient_1");
-		_ingredient._amount = 2;
-		_ingredient._icon = Resources.Load("Item/Icon/ingredient_1") as Texture2D;	
+	void CreateRandomItem(int id) {
+			name = "ingredient_" + id;
+			_ingredient = new Ingredient(id, name);
+			_ingredient._amount = 1;
+			_ingredient._icon = Resources.Load("Item/Icon/" + name) as Texture2D;	
 	}
 }
