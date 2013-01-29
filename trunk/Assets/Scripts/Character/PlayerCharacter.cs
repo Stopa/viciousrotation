@@ -239,6 +239,8 @@ public class PlayerCharacter: BaseCharacter {
 						_attackTimer = Weapon._cooldown;
 					}
 					else if(target.tag == "friendly") {
+						Time.timeScale = 0;
+						_canAttack = false;
 						DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
 						BaseNPCChat ch = target.GetComponent("BaseNPCChat") as BaseNPCChat;
 						if(Vector3.Distance(target.transform.position, gameObject.transform.position) <= ch.TalkDistance) {
