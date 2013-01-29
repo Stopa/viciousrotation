@@ -11,6 +11,12 @@ public class PissFairyChat : BaseNPCChat {
 	}
 	
 	public override void GoodEnd() {
+		GameObject[] spawners = GameObject.FindGameObjectsWithTag("DisabledEnemySpawner");
+		Debug.Log (spawners.Length);
+		for(int i = 0;i < spawners.Length;i++) {
+			BaseSpawner spawner = spawners[i].GetComponent("BaseSpawner") as BaseSpawner;
+			spawner._fauxActive=true;
+		}
 		Debug.Log ("Good end!");
 	}
 	

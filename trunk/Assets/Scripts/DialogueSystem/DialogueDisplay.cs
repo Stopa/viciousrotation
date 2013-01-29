@@ -30,7 +30,6 @@ public class DialogueDisplay : MonoBehaviour {
 	void OnGUI () {
 		
 		if(_showDialogue) {
-			Debug.Log("showing dialogue");
 			IList optionsList = (IList)((IDictionary)_chatObjects[_currentChatObject])["options"];
 			string[] selStrings = new string[optionsList.Count];
 			ArrayList options = new ArrayList();

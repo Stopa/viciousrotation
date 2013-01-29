@@ -6,19 +6,22 @@ public class BaseSpawner : MonoBehaviour {
 	public string _prefabPath;
 	public int _maxSpawns;
 	public float _spawnCooldown;
+	public bool _fauxActive;
 	
-	private Object _spawnableObject;
-	private float _spawnTimer;
+	protected Object _spawnableObject;
+	protected float _spawnTimer;
 	private int _totalSpawns;
-	private bool _colliding;
+	protected bool _colliding;
 
 	void Start () {
 		_spawnableObject = Resources.Load(_prefabPath);
-		_spawnTimer = _spawnCooldown;
+		_spawnTimer = 0;
 		_colliding = false;
+		_fauxActive = true;
 	}
 	
 	void Update () {
+		if(!_fauxActive) {return;}
 		if(_totalSpawns >= _maxSpawns) {
 			// disable spawner when maximum number of NPCs have been spawned
 			gameObject.active = false;
