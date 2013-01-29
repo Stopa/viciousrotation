@@ -179,8 +179,14 @@ public class PlayerCharacter: BaseCharacter {
 			
 			if(_horisontalLookingDirection == HorisontalLookingDirection.Left) {
 				animationName += "l";
-			} else {
+			} else if(_horisontalLookingDirection == HorisontalLookingDirection.Right) {
 				animationName += "r";
+			} else {
+				if(_verticalLookingDirection == VerticalLookingDirection.Up) {
+					animationName += "t";
+				} else {
+					animationName += "d";
+				}
 			}
 		} else if(_actionTaken == ActionTaken.Idle) {
 			animationName = "idle_" + DirectionAbbreviation();
@@ -264,7 +270,7 @@ public class PlayerCharacter: BaseCharacter {
 					_actionTaken = ActionTaken.RangedAttack;
 					Debug.Log("Throwing bomb: " + e._name);
 					GameObject target = FindClickTarget();
-					GameObject explosion = (GameObject)Instantiate(Resources.Load("Prefabs/MyExplosion"), _clickPoint, Quaternion.identity);
+					GameObject explosion = (GameObject)Instantiate(Resources.Load("Prefabs/Explosion"), new Vector3(_clickPoint.x,5,_clickPoint.z), Quaternion.identity);
 					Explosion expScript = explosion.GetComponent("Explosion") as Explosion;
 					expScript._damage = 10;
 					e._amount--;

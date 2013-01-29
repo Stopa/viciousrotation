@@ -3,13 +3,6 @@ using System.Collections;
 
 public class Explosion : MonoBehaviour {
 	public int _damage;
-
-	void Start () {
-	}
-	
-	void Update () {
-	
-	}
 	
     void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Enemy") {
