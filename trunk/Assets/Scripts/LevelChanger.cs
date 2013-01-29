@@ -64,7 +64,7 @@ public class LevelChanger: MonoBehaviour {
 			//Application.LoadLevel("haldjamets");
 		}
 		else if(curLevel == "haldjamets") {
-			//Application.LoadLevel("doctor");
+			Application.LoadLevel("graveyard");
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class LevelChanger: MonoBehaviour {
 			_quote = quotesDoctor[index];
 			_portrait = Resources.Load("Portraits/doctor")as Texture2D;
 			break;
-			case "forest":
+			case "haldjamets":
 			_char = "Piss Fairy";
 			_quote = quotesFairy[index];
 			_portrait = Resources.Load("Portraits/fairy")as Texture2D;
