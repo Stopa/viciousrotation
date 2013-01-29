@@ -18,6 +18,12 @@ public class LevelChanger: MonoBehaviour {
 		transform.collider.isTrigger = false;
 		
 		_customSkin = Resources.Load("Gui/DialogueSkin") as GUISkin;
+		
+		GameObject player = GameObject.FindWithTag("Player");
+		Vector3 spawnPoint = GameObject.FindWithTag("PlayerSpawn").transform.position;
+		float playerHeight = player.transform.lossyScale.y/player.transform.lossyScale.x;
+		spawnPoint.y += playerHeight;
+		player.transform.position = spawnPoint;
 	}
 	
 	void Update() {
@@ -44,7 +50,8 @@ public class LevelChanger: MonoBehaviour {
 	
     void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Player") {
-			SetQuote("graveyard");
+			Debug.Log(Application.loadedLevelName);
+			SetQuote(Application.loadedLevelName);
 			_showConfimation = true;
 		}
     }
@@ -66,6 +73,7 @@ public class LevelChanger: MonoBehaviour {
 	}
 	
 	private void SetQuote(string curLevel) {
+		
 		string[] quotesDigger = new string[3]{"A dead corpse is the best kind of corpse.","I collect shovels.","Zombies... hmm."};
 		string[] quotesFairy = new string[3]{"My best friend is Bear Grylls.","I get all my vitamins from piss.","Piss."};
 		string[] quotesDoctor = new string[3]{"yolo","swag","no homo"};
