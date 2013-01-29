@@ -101,30 +101,30 @@ public class PlayerCharacter: BaseCharacter {
 		w._icon = Resources.Load("Item/Icon/melee_2") as Texture2D;
 		w = _weapons[2] as Weapon;
 		w._icon = Resources.Load("Item/Icon/ranged") as Texture2D;
-		
-		Explosive e = new Explosive("bomb_1", "bomb", 15.0f, 4.0f, 15, 2.0f);
+
+		Explosive e = new Explosive(1,"bomb_1", 15.0f, 4.0f, 10, 3.0f);
 		e._icon = Resources.Load("Item/Icon/bomb_1") as Texture2D;
-		e._amount = 3;
+		e._amount = 2;
 		_inventory.AddItem(e);		
 	}
 	
 	private void InitItems() {
-		Ingredient i = new Ingredient("ingredient_1");
+		Ingredient i = new Ingredient(1, "ingredient_1");
 		i._icon = Resources.Load("Item/Icon/ingredient_1") as Texture2D;
 		i._amount = 1;
 		_inventory.AddItem(i);
 		
-		Ingredient i2 = new Ingredient("ingredient_2");
+		Ingredient i2 = new Ingredient(2, "ingredient_2");
 		i2._icon = Resources.Load("Item/Icon/ingredient_2") as Texture2D;
 		i2._amount = 2;
 		_inventory.AddItem(i2);
 		
-		Formula f = new Formula("formula_1");
+		Formula f = new Formula(1, "formula_1");
 		f._icon = Resources.Load("Item/Icon/formula_1") as Texture2D;
 		f._ingredients.Add(i, 1);
 		_inventory.AddItem(f);
 		
-		Formula f2 = new Formula("formula_2");
+		Formula f2 = new Formula(2, "formula_2");
 		f2._icon = Resources.Load("Item/Icon/formula_2") as Texture2D;
 		f2._ingredients.Add(i, 3);
 		f2._ingredients.Add(i2, 1);

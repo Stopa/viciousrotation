@@ -5,9 +5,9 @@ public class Explosive: Weapon {
 	
 	public float _area;
 	
-	public Explosive(string name, string type, float range, float area, int damage, float cooldown) {
+	public Explosive(int id, string name, float range, float area, int damage, float cooldown) {
+		_id = id;
 		_name = name;
-		_type = "explosive";
 		_range = range;
 		_area = area;
 		_damage = damage;
