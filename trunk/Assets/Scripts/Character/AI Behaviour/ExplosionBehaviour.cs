@@ -17,7 +17,7 @@ public class ExplosionBehaviour : MonoBehaviour
 	void Update ()
 	{
 		if(!_delegateSet) {
-			//_sprite.sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(ExplosionDeath));
+			_sprite.sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(ExplosionDeath));
 			_delegateSet = true;
 		}
 		if(_sprite.IsAnimationNotRunning("idle")) { //TODO - define default animation otherwise if needed

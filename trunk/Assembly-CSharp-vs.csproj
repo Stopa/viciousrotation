@@ -66,7 +66,7 @@
      <Compile Include="Assets\Scripts\MiniJSON\MiniJSON.cs" />
      <Compile Include="Assets\Scripts\Obsolete\HealthDisplay.cs" />
      <Compile Include="Assets\Scripts\Obsolete\InventoryDisplay.cs" />
-     <Compile Include="Assets\Scripts\SoundManager.cs" />
+     <Compile Include="Assets\Scripts\Spawner\BaseDisabledSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawner\BaseSpawner.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\LinkedSpriteManager.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\Sprite.cs" />
