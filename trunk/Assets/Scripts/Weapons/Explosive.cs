@@ -25,7 +25,7 @@ public class Explosive: Weapon {
 	    foreach(Collider h in colliders) {
 	        if (!h) continue; // avoid null references (should not occur, but...)
 
-			if(h.gameObject.tag == "enemy") {
+			if(h.gameObject.tag == "Enemy") {
 				Debug.Log(h.gameObject);
 				Debug.DrawLine(position, h.transform.position, Color.yellow);
 				BaseCharacter bc = (BaseCharacter)h.GetComponent("BaseCharacter");

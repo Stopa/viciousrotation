@@ -233,12 +233,12 @@ public class PlayerCharacter: BaseCharacter {
 				GameObject target = FindClickTarget();
 				
 				if(target != null) {
-					if(target.tag == "enemy" && _attackTimer <= 0) {
+					if(target.tag == "Enemy" && _attackTimer <= 0) {
 						Debug.Log("Hit enemy: " + target.name);
 						Attack(target);
 						_attackTimer = Weapon._cooldown;
 					}
-					else if(target.tag == "friendly") {
+					else if(target.tag == "Friendly") {
 						Time.timeScale = 0;
 						_canAttack = false;
 						DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
