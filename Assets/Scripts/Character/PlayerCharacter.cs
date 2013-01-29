@@ -18,6 +18,11 @@ public class PlayerCharacter: BaseCharacter {
 		set{ _curWeapon = value;}	
 	}
 	
+	public bool CanAttack {
+		get {return _canAttack;}
+		set {_canAttack = value;}
+	}
+	
 	void Awake(){
 		DontDestroyOnLoad(gameObject);
 		

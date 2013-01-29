@@ -99,6 +99,7 @@ public class DialogueDisplay : MonoBehaviour {
 	public void CloseDisplay() {
 		_partner = null;	
 		_showDialogue = false;
+		_player.CanAttack = true;
 		Time.timeScale = 1;
 	}	
 	
