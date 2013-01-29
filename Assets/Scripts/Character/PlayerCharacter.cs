@@ -252,7 +252,6 @@ public class PlayerCharacter: BaseCharacter {
 					else if(target.tag == "Friendly") {
 						BaseNPCChat ch = target.GetComponent("BaseNPCChat") as BaseNPCChat;
 						if(Vector3.Distance(target.transform.position, gameObject.transform.position) <= ch.TalkDistance) {
-							Debug.Log("asd");
 							Time.timeScale = 0;
 							_canAttack = false;
 							DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
