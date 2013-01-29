@@ -239,11 +239,12 @@ public class PlayerCharacter: BaseCharacter {
 						_attackTimer = Weapon._cooldown;
 					}
 					else if(target.tag == "Friendly") {
-						Time.timeScale = 0;
-						_canAttack = false;
-						DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
 						BaseNPCChat ch = target.GetComponent("BaseNPCChat") as BaseNPCChat;
 						if(Vector3.Distance(target.transform.position, gameObject.transform.position) <= ch.TalkDistance) {
+							Debug.Log("asd");
+							Time.timeScale = 0;
+							_canAttack = false;
+							DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
 							disp.OpenDisplay(ch);
 						}
 					}
@@ -303,7 +304,7 @@ public class PlayerCharacter: BaseCharacter {
 		return null;
 	}
 	
-	public void Attack(GameObject target) {
+	private void Attack(GameObject target) {
 		float distance = Vector3.Distance(target.transform.position, transform.position);
 		
 		if(distance <= _curWeapon._range){	
@@ -311,6 +312,10 @@ public class PlayerCharacter: BaseCharacter {
 			BaseCharacter bc = (BaseCharacter)target.GetComponent("BaseCharacter");
 			bc.AdjustCurrentHealth(-(_curWeapon._damage));
 		}		
+	}
+	
+	private void ThrowBomb() {
+		
 	}
 	#endregion
 }
