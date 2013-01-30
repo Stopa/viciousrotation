@@ -42,11 +42,11 @@ public class BaseSpawner : MonoBehaviour {
 		_totalSpawns++;
 	}
 	
-	void OnCollisionEnter() {
+	void OnTriggerEnter() {
 		_colliding = true;
 	}
 	
-	void OnCollisionExit() {
+	void OnTriggerExit() {
 		_colliding = false;
 	}
 }

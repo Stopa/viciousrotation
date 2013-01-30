@@ -43,6 +43,7 @@ public class LevelChanger: MonoBehaviour {
 	}
 	
 	void Update() {
+		CheckExitConditions();
 		if(_canExit) {
 			_light.enabled = true;
 			transform.collider.isTrigger = true;
@@ -115,6 +116,15 @@ public class LevelChanger: MonoBehaviour {
 			_quote = quotesFairy[index];
 			_portrait = Resources.Load("Portraits/fairy_plain")as Texture2D;
 			break;
+		}
+	}
+	
+	void CheckExitConditions() {
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		GameObject[] actSpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+		GameObject[] disSpawners = GameObject.FindGameObjectsWithTag("DisabledEnemySpawner");
+		if(enemies.Length == 0 && actSpawners.Length == 0 && disSpawners.Length == 0) {
+			_canExit = true;
 		}
 	}
 }
