@@ -111,7 +111,7 @@ public class StoryDisplay : MonoBehaviour {
 			_texts.Enqueue(text_3);
 			Queue<string> text_4 = new Queue<string>();
 			text_4.Enqueue("The demonic magic found it's way into your body.");
-			text_4.Enqueue("And it will not let rest.");
+			text_4.Enqueue("And it will not let you rest.");
 			_texts.Enqueue(text_4);
 			
 			_btnLabel = "Continue";
