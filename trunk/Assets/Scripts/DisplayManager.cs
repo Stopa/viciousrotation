@@ -28,7 +28,7 @@ public class DisplayManager : MonoBehaviour {
 	
 	//INVENTORY
 	private Inventory _inventory;
-	private Rect _inventoryWindow = new Rect(100,200,400,250);
+	private Rect _inventoryWindow = new Rect(100,200,250,250);
 	private bool _canCraftItem;
 	private Formula  _selectedFormula;
 	private Item _selectedItem;
@@ -44,7 +44,7 @@ public class DisplayManager : MonoBehaviour {
 		_healthBarLength = Screen.width / 2;		
 		_maxHealth = _player.MaxHealth;
 		_curHealth = _player.Health;
-		_cycleTime = 180;
+		_cycleTime = 600;
 		UpdateClockSettings();
 		
 		_inventory = _player._inventory;
@@ -125,8 +125,8 @@ public class DisplayManager : MonoBehaviour {
 		ArrayList formulas = _inventory.Formulas;
 		ArrayList ings = _inventory.Ingredients;
 
-		int y = 10;
-		int x = 0;
+		int y = 20;
+		int x = 10;
 		foreach(Formula f in formulas) {
 			if (GUI.Button(new Rect(x, y, 64, 64), f._icon))
 				FormulaBtnPressed(f);
@@ -134,30 +134,31 @@ public class DisplayManager : MonoBehaviour {
 		}
 		
 		y += 60;
-		x = 0;
+		x = 10;
 		foreach(Ingredient i in ings) {
 			GUI.DrawTexture(new Rect(x ,y, 64, 64), i._icon);
-			GUI.Label(new Rect(x+5, y+10, 30, 30), i._amount.ToString());
+			GUI.Label(new Rect(x+5, y+5, 30, 30), i._amount.ToString());
 			x+= 70;
 		}
 		
 		y += 60;
-		x = 0;
+		x = 10;
 		foreach(Item i in bombs) {
 			if (GUI.Button(new Rect(x, y, 64, 64), i._icon)) {
 				_selectedItem = i;
 			}
-			GUI.Label(new Rect(x+5, y+10, 30, 30), i._amount.ToString());
+			GUI.Label(new Rect(x+5, y+5, 30, 30), i._amount.ToString());
 			x+= 70;
 		} 
 		
+		y += 70;
 		//BUTTONS
 		GUI.enabled = _canCraftItem;
-	    if (GUI.Button(new Rect(10, 200, 50, 30), "Craft!"))
+	    if (GUI.Button(new Rect(10, y, 50, 30), "Craft!"))
              CraftBtnPressed();
 		GUI.enabled = true;
 		
-		if (GUI.Button(new Rect(100, 200, 50, 30), "Equip!"))
+		if (GUI.Button(new Rect(70, y, 50, 30), "Equip!"))
              EquipBtnPressed();
 		
 		GUI.enabled = true;
