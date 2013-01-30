@@ -56,6 +56,9 @@
      <Compile Include="Assets\Scripts\Character\BaseCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\BaseEnemyCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\NPC Chat\BaseNPCChat.cs" />
+     <Compile Include="Assets\Scripts\Character\NPC Chat\DoctorChat.cs" />
+     <Compile Include="Assets\Scripts\Character\NPC Chat\GraveDiggerChat.cs" />
+     <Compile Include="Assets\Scripts\Character\NPC Chat\NPC Chat.cs" />
      <Compile Include="Assets\Scripts\Character\NPC Chat\PissFairyChat.cs" />
      <Compile Include="Assets\Scripts\Character\NPC Chat\SmokeBeardChat.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerCharacter.cs" />

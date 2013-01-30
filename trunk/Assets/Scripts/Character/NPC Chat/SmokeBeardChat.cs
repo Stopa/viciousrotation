@@ -8,6 +8,7 @@ public class SmokeBeardChat : BaseNPCChat {
 		_portrait = Resources.Load ("Portraits/smokebeard") as Texture2D;
 		TalkDistance = 40f;
 		_chatFile = "bossmonster";
+		_canTalk = true;
 	}
 	
 	public override void GoodEnd() {
@@ -17,5 +18,9 @@ public class SmokeBeardChat : BaseNPCChat {
 	public override void BadEnd() {
 		Debug.Log("bad end");
 		((SmokeBeardBehaviour)gameObject.GetComponent ("SmokeBeardBehaviour")).DoTransform();
+		_canTalk = false;
+		GameObject exit = GameObject.Find("ExitCollider");
+		LevelChanger lc = exit.GetComponent("LevelChanger") as LevelChanger;
+		lc._canExit = false;
 	}
 }

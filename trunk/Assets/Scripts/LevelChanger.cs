@@ -55,7 +55,7 @@ public class LevelChanger: MonoBehaviour {
 			GUI.skin = _customSkin;
 			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Resources.Load("Gui/black")as Texture2D);
 			GUI.DrawTexture(new Rect(Screen.width-Screen.width/3, 0, 256, 512), _portrait);
-			GUI.Label(new Rect(50, Screen.width/2, Screen.width/2, 200), _quote+ "\n\t -" +_char);
+			GUI.Label(new Rect(50, Screen.width/3, Screen.width/2, 200), _quote+ "\n\t -" +_char);
 			
 			if (GUI.Button(new Rect(50, Screen.height-100, 150, 50),"Exit " + Application.loadedLevelName)) 
 				ChangeLevel(Application.loadedLevelName);
@@ -76,6 +76,7 @@ public class LevelChanger: MonoBehaviour {
     }
 	
 	private void ChangeLevel(string curLevel) {
+		Time.timeScale = 1;
 		if(curLevel == "graveyard") {
 			Application.LoadLevel("haldjamets");
 		}

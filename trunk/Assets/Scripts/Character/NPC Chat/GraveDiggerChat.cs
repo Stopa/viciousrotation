@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-public class PissFairyChat : BaseNPCChat {
+public class GraveDiggerChat : BaseNPCChat {
 
 	void Awake() {
-		Name = "Piss Fairy";
-		_portrait = Resources.Load ("Portraits/Fairy") as Texture2D;
+		Name = "Grave Digger";
+		_portrait = Resources.Load ("Portraits/gravedigger") as Texture2D;
 		TalkDistance = 7f;
-		_chatFile = "chat";
+		_chatFile = "chat_digger";
 		_canTalk = true;
 	}
 	
@@ -19,13 +19,10 @@ public class PissFairyChat : BaseNPCChat {
 			spawner._fauxActive=true;
 		}
 		Debug.Log ("Good end!");
+		_canTalk = false;
 	}
 	
 	public override void BadEnd() {
 		Debug.Log ("Bad end!");
-		_canTalk = false;
-		GameObject exit = GameObject.Find("ExitCollider");
-		LevelChanger lc = exit.GetComponent("LevelChanger") as LevelChanger;
-		lc._canExit = false;
 	}
 }

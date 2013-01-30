@@ -266,7 +266,7 @@ public class PlayerCharacter: BaseCharacter {
 					}
 					else if(target.tag == "Friendly" || (target.tag == "BossMonster" && !((SmokeBeardBehaviour)target.GetComponent("SmokeBeardBehaviour"))._transformed)) {
 						BaseNPCChat ch = target.GetComponent("BaseNPCChat") as BaseNPCChat;
-						if(Vector3.Distance(target.transform.position, gameObject.transform.position) <= ch.TalkDistance) {
+						if(Vector3.Distance(target.transform.position, gameObject.transform.position) <= ch.TalkDistance && ch._canTalk) {
 							Time.timeScale = 0;
 							_canAttack = false;
 							DialogueDisplay disp = gameObject.GetComponent("DialogueDisplay") as DialogueDisplay;
@@ -339,4 +339,8 @@ public class PlayerCharacter: BaseCharacter {
 		}		
 	}
 	#endregion
+	
+	public void SetFlag(string flag, bool value) {
+		
+	}
 }
