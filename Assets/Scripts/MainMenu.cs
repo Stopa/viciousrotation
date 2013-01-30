@@ -3,14 +3,15 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 	
-	private static string _firstLevel = "graveyard";
 	private GUISkin _customSkin;
+	private Texture2D _backGround;
 	private bool _showMenu;
 	private bool _showCredits;
 	
 	// Use this for initialization
 	void Start() {
 		_customSkin = Resources.Load("Gui/DialogueSkin") as GUISkin;
+		_backGround = Resources.Load("Story/paperBackground") as Texture2D;
 		_showMenu = true;
 		_showCredits = false;
 	}
@@ -48,7 +49,10 @@ public class MainMenu : MonoBehaviour {
 	private void StartGame() {
 		//check if level is loaded, 1=100%
 		//if(Application.GetStreamProgressForLevel(_firstLevel) == 1) {
-		Application.LoadLevel(_firstLevel);
+		_showMenu = false;
+		StoryDisplay sd = gameObject.GetComponent("StoryDisplay") as StoryDisplay;
+		sd._story = "start";
+		sd.LoadImages();
 	}
 	
 	private void ExitGame() {

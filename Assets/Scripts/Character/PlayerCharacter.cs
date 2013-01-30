@@ -7,6 +7,7 @@ public class PlayerCharacter: BaseCharacter {
 	private float _attackTimer;
 	private Vector3 _clickPoint;
 	private bool _canAttack;
+	private bool _canDie;
 	
 	public Inventory _inventory;
 	private ArrayList _weapons;
@@ -45,6 +46,14 @@ public class PlayerCharacter: BaseCharacter {
 	
 	// Update is called once per frame
 	void Update () {
+		if(Health <= 0) {
+			if(_canDie) {
+				Application.LoadLevel("MainMenu");
+				return;
+			}
+			else 
+				Health = 10;
+		}
 		_actionTaken = ActionTaken.Idle;
 		//MOVEMENT
 		Vector3 moveDirection = Vector3.zero;
