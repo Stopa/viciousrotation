@@ -12,7 +12,6 @@ public class BaseEnemyCharacter: BaseCharacter {
 	public float _attackRange;
 	public float _attackSpeed;
 	
-	protected BaseSprite sprite;
 	protected bool _existingNPC;
 	
 	private float _attackTimer;
@@ -34,7 +33,7 @@ public class BaseEnemyCharacter: BaseCharacter {
 		GameObject go = GameObject.FindGameObjectWithTag("Player");
 		_target = go.transform;
 		_player = go.GetComponent("PlayerCharacter") as PlayerCharacter;
-		sprite = (BaseSprite)gameObject.GetComponent("BaseSprite");
+		_sprite = (BaseSprite)gameObject.GetComponent("BaseSprite");
 		_attackTimer = 0;
 		_random = new System.Random();
 	}
@@ -46,7 +45,7 @@ public class BaseEnemyCharacter: BaseCharacter {
 		}
 		if(Health <= 0) {
 			if(!dead) {
-				sprite.sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(DeathAnimationComplete));
+				_sprite.sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(DeathAnimationComplete));
 				_actionTaken = ActionTaken.Death;
 				dead = true;
 			}
@@ -109,7 +108,7 @@ public class BaseEnemyCharacter: BaseCharacter {
 	void DeathAnimationComplete() {
 		DropItem();
 		Destroy(gameObject);
-		sprite.DestroySprite();
+		_sprite.DestroySprite();
 	}
 	#endregion
 	

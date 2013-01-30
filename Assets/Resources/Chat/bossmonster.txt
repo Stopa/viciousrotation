@@ -1,0 +1,17 @@
+{
+	"chat": [
+		{
+			"text": "Are you ready to fucking get it the dick on, ol' chap?!",
+			"options": [
+				{
+					"text": "Woah man not yet",
+					"goto": -1
+				},
+				{
+					"text": "LET'S DO THIS, FATSO!",
+					"goto": -2
+				}
+			]
+		}
+	]
+}

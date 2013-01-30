@@ -251,11 +251,11 @@ public class PlayerCharacter: BaseCharacter {
 				GameObject target = FindClickTarget();
 				
 				if(target != null) {
-					if(target.tag == "Enemy" && _attackTimer <= 0) {
+					if((target.tag == "Enemy" || (target.tag == "BossMonster" && ((SmokeBeardBehaviour)target.GetComponent("SmokeBeardBehaviour"))._transformed)) && _attackTimer <= 0) {
 						Attack(target);
 						_attackTimer = Weapon._cooldown;
 					}
-					else if(target.tag == "Friendly") {
+					else if(target.tag == "Friendly" || (target.tag == "BossMonster" && !((SmokeBeardBehaviour)target.GetComponent("SmokeBeardBehaviour"))._transformed)) {
 						BaseNPCChat ch = target.GetComponent("BaseNPCChat") as BaseNPCChat;
 						if(Vector3.Distance(target.transform.position, gameObject.transform.position) <= ch.TalkDistance) {
 							Time.timeScale = 0;

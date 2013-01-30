@@ -31,11 +31,11 @@ public class ZombieBehaviour : BaseEnemyCharacter
 			animationName += "r";
 		}
 		
-		if(sprite.IsAnimationNotRunning(animationName)) {
+		if(_sprite.IsAnimationNotRunning(animationName)) {
 			if(_actionTaken == ActionTaken.Death) {
-				sprite.PlayAnimation(animationName);
+				_sprite.PlayAnimation(animationName);
 			} else {
-				sprite.PlayAnimationIfCanInterrupt(animationName);
+				_sprite.PlayAnimationIfCanInterrupt(animationName);
 			}
 		}
 	}
