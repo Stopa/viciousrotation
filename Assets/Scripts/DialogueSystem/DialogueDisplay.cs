@@ -42,7 +42,7 @@ public class DialogueDisplay : MonoBehaviour {
 		    // Draw a box in the new coordinate space defined by the BeginGroup.
 			GUI.Box(new Rect(0,0,180,200), "");
 			GUI.DrawTexture(new Rect(0,0,180,200), _player._portrait);
-			GUI.Box(new Rect(Screen.width - 180,0,180,200), _partner.Name);
+			GUI.Box(new Rect(Screen.width - 180,0,180,200), "");
 			GUI.DrawTexture(new Rect(Screen.width - 180,0,180,200), _partner._portrait);
 			
 			GUI.Box(new Rect(180,0,Screen.width - 180*2,100), (string)((IDictionary)_chatObjects[_currentChatObject])["text"]);
