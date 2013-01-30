@@ -28,8 +28,10 @@ public class SmokeBeardBulletBehaviour : MonoBehaviour
 		}
 	}
 	
-	void OnTriggerEnter() {
-		Die ();
+	void OnTriggerEnter(Collider other) {
+		if(other.gameObject.tag != "BossMonster") {
+			Die ();
+		}
 	}
 	
 	void Die() {
