@@ -94,11 +94,11 @@ public class LevelChanger: MonoBehaviour {
 	
 	private void SetQuote(string curLevel) {
 		
-		string[] quotesDigger = new string[3]{"A dead corpse is the best kind of corpse.","I collect shovels.","Zombies... hmm."};
-		string[] quotesFairy = new string[3]{"My best friend is Bear Grylls.","I get all my vitamins from piss.","Piss."};
-		string[] quotesDoctor = new string[3]{"yolo","swag","no homo"};
+		string[] quotesDigger = new string[2]{"A dead corpse is the best kind of corpse.","I collect shovels."};
+		string[] quotesFairy = new string[2]{"My best friend is Bear Grylls.","I get all my vitamins from piss."};
+		string[] quotesDoctor = new string[2]{"#YOLO","Who need medicine when you have swag?"};
 		
-		int index = Random.Range(0, 3);
+		int index = Random.Range(0, 2);
 		switch (curLevel) {
 			case "graveyard":
 			_char = "The Gravedigger";
