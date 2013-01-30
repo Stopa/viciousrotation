@@ -98,7 +98,7 @@ public class BaseEnemyCharacter: BaseCharacter {
 	
 	private void DropItem() {
 		Vector3 pos = transform.position;
-		pos.y -= 1;
+		pos.y = 1;
 		GameObject item = (GameObject)Instantiate(Resources.Load("Prefabs/DroppedItem"), pos, Quaternion.identity);		
 	}
 	

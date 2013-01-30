@@ -39,6 +39,11 @@ public class SmokeBeardBehaviour : BaseCharacter
 		
 		if(Health <= 0) {
 			Debug.Log ("OK he is dead now but what do?");
+			Object[] objects = FindObjectsOfType (typeof(GameObject));
+			foreach (GameObject go in objects) {
+			    Destroy(go);
+   			}
+			Application.LoadLevel("end");
 			return;
 		}
 		
