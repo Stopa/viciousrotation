@@ -52,9 +52,11 @@ public class LevelChanger: MonoBehaviour {
 				spawnPoint = GameObject.Find("DoctorSpawn").transform.position;
 				spawnPoint.y += playerHeight;
 				Instantiate(Resources.Load("Prefabs/NPCs/Friendly/Doctor"), spawnPoint, Quaternion.identity);
-				
 			}
 		}
+		
+		DisplayManager dm = player.GetComponent("DisplayManager") as DisplayManager;
+		dm.ChangeDisplayState("hud", true);
 	}
 	
 	void Update() {
