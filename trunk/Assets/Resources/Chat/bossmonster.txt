@@ -1,17 +1,38 @@
 {
 	"chat": [
 		{
-			"text": "Are you ready to fucking get it the dick on, ol' chap?!",
+			"text": "	We meet once again laddy-boy.",
 			"options": [
 				{
-					"text": "Woah man not yet",
-					"goto": -1
+					"text": "You tried to kill me!",
+					"goto": 1
 				},
 				{
-					"text": "LET'S DO THIS, FATSO!",
+					"text": "You know what. I have more important things to do right now so I'll just uhh... leave.",
+					"goto": -1
+				}
+			]
+		},
+		
+		{
+			"text": "	You were threatening my status! Did you know that those demonic documents contained the secret of turning gold into brass. Brass is the manliest of metals.",
+			"options": [
+				{
+					"text": "Brass is an ALLOY!",
+					"goto": 2
+				}
+			]
+		},
+		{
+			"text": "	I am the king of brass. I can not allow you to ruin my business.",
+			"options": [
+				{
+					"text": "We fight!",
 					"goto": -2
 				}
 			]
-		}
+		},
+		
+		
 	]
 }
