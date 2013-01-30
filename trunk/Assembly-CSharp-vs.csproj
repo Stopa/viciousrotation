@@ -50,11 +50,14 @@
      <Compile Include="Assets\Scripts\Character\AI Behaviour\GhostBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\PassiveBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\SlimeBallBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Character\AI Behaviour\SmokeBeardBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Character\AI Behaviour\SmokeBeardBulletBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\AI Behaviour\ZombieBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character\BaseCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\BaseEnemyCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\NPC Chat\BaseNPCChat.cs" />
      <Compile Include="Assets\Scripts\Character\NPC Chat\PissFairyChat.cs" />
+     <Compile Include="Assets\Scripts\Character\NPC Chat\SmokeBeardChat.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerCharacter.cs" />
      <Compile Include="Assets\Scripts\DayCycle.cs" />
      <Compile Include="Assets\Scripts\DialogueSystem\DialogueDisplay.cs" />
@@ -78,6 +81,8 @@
      <Compile Include="Assets\Scripts\Sprites\PissFairySprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\PlayerCharacterSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\SlimeBallSprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\SmokeBeardBulletSprite.cs" />
+     <Compile Include="Assets\Scripts\Sprites\SmokeBeardSprite.cs" />
      <Compile Include="Assets\Scripts\Sprites\ZombieSprite.cs" />
      <Compile Include="Assets\Scripts\Weapons\DroppedItem.cs" />
      <Compile Include="Assets\Scripts\Weapons\Explosion.cs" />
@@ -90,6 +95,7 @@
      <None Include="Assets\Resources\Chat\chat.txt" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
+     <None Include="Assets\Resources\Chat\bossmonster.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>

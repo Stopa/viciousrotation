@@ -9,9 +9,9 @@ public class BaseSprite : MonoBehaviour {
 	public int spriteWidth;
 	public int spriteHeight;
 	public Sprite sprite;
+	public bool _animationRunning;
 	
 	protected SpriteManager spriteManager;
-	protected bool _animationRunning;
 
 	// Use this for initialization
 	void Start () {
@@ -70,5 +70,9 @@ public class BaseSprite : MonoBehaviour {
 			charBehaviour.Existing = true;
 		}
 		_animationRunning = false;
+	}
+	
+	public void ResetDelegate() {
+		sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(AnimationCompleted));		
 	}
 }

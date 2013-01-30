@@ -4,7 +4,7 @@ using System.Collections;
 public class BaseCharacter: MonoBehaviour {
 	
 	private string _name;
-	private int _moveSpeed;
+	private float _moveSpeed;
 	private int _maxHealth = 100;
 	private int _curHealth = 100;
 	protected HorisontalLookingDirection _horisontalLookingDirection;
@@ -24,7 +24,7 @@ public class BaseCharacter: MonoBehaviour {
 		get{ return _name;}
 		set{ _name = value;}	
 	}
-	public int Speed {
+	public float Speed {
 		get{ return _moveSpeed;}
 		set{ _moveSpeed = value;}	
 	}
