@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DisplayManager : MonoBehaviour {
 	
-	private bool _showHud;
+	public bool _showHud;
 	private bool _showInventory;
 	private bool _showDialogue;
 	

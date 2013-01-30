@@ -12,12 +12,6 @@ public class PissFairyChat : BaseNPCChat {
 	}
 	
 	public override void GoodEnd() {
-		GameObject[] spawners = GameObject.FindGameObjectsWithTag("DisabledEnemySpawner");
-		Debug.Log (spawners.Length);
-		for(int i = 0;i < spawners.Length;i++) {
-			BaseSpawner spawner = spawners[i].GetComponent("BaseSpawner") as BaseSpawner;
-			spawner._fauxActive=true;
-		}
 		Debug.Log ("Good end!");
 		GameObject player = GameObject.FindWithTag("Player");
 		PlayerCharacter pc = player.GetComponent("PlayerCharacter") as PlayerCharacter;
@@ -26,9 +20,21 @@ public class PissFairyChat : BaseNPCChat {
 	
 	public override void BadEnd() {
 		Debug.Log ("Bad end!");
+		GameObject player = GameObject.FindWithTag("Player");
+		PlayerCharacter pc = player.GetComponent("PlayerCharacter") as PlayerCharacter;
+		pc.SetFlag("gotPiss",true);
 		_canTalk = false;
-		GameObject exit = GameObject.Find("ExitCollider");
+		Instantiate(Resources.Load("Prefabs/NPCs/Enemies/Enemy_EvilPissFairy"), transform.position, Quaternion.identity);
+		
+		GameObject[] spawners = GameObject.FindGameObjectsWithTag("DisabledEnemySpawner");
+		Debug.Log (spawners.Length);
+		for(int i = 0;i < spawners.Length;i++) {
+			BaseSpawner spawner = spawners[i].GetComponent("BaseSpawner") as BaseSpawner;
+			spawner._fauxActive = true;
+		}
+		
+		/*GameObject exit = GameObject.Find("ExitCollider");
 		LevelChanger lc = exit.GetComponent("LevelChanger") as LevelChanger;
-		lc._canExit = false;
+		lc._canExit = false;*/
 	}
 }

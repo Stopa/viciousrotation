@@ -20,6 +20,7 @@ public class GraveDiggerChat : BaseNPCChat {
 		}
 		Debug.Log ("Good end!");
 		_canTalk = false;
+		
 	}
 	
 	public override void BadEnd() {
