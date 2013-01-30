@@ -1,7 +1,7 @@
 {
 	"chat": [
 		{
-			"text": "	Hello, handsome stranger. How can I help you?",
+			"text": "Hello, handsome stranger. How can I help you?",
 			"options": [
 				{
 					"text": "You have beautiful eyes.",
@@ -22,7 +22,7 @@
 			]
 		},
 		{
-			"text": "	Tee-hee. You are such a charmer.",
+			"text": "Tee-hee. You are such a charmer.",
 			"options": [
 				{
 					"text": "Only you can help me. I am in danger and even if it sounds wrong I need your urine. Trust me. It is for science.",
@@ -31,7 +31,7 @@
 			]
 		},
 		{
-			"text": "	Get lost, you pervert.",
+			"text": "Get lost, you pervert.",
 			"options": [
 				{
 					"text": "OH NOES",
@@ -40,7 +40,7 @@
 			]
 		}
 		{
-			"text": "	I'm a piss-fairy you silly. Who else would be living in the Piss-Fairy Forest.",
+			"text": "I'm a piss-fairy you silly. Who else would be living in the Piss-Fairy Forest.",
 			"options": [
 				{
 					"text": "Cool beans, little turnip. Can I have your piss?",
@@ -49,7 +49,7 @@
 			]
 		}
 		{
-			"text": "	The NACJAC. Of course I have heard of it. My great grandfather was THE Neo Armstrong. I am Pipi Armstrong the XXII. Ask me anything.",
+			"text": "The NACJAC. Of course I have heard of it. My great grandfather was THE Neo Armstrong. I am Pipi Armstrong the XXII. Ask me anything.",
 			"options": [
 				{
 					"text": "	Great! Then I'll make it short. I need your piss.",

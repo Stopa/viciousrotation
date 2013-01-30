@@ -4,14 +4,32 @@
 			"text": "Hello my good chap! What can I do for you?",
 			"options": [
 				{
-					"text": "blahblah",
-					"goto": -1
+					"text": "Help me doctor, monsters keep spawning around me.",
+					"goto": 1
 				},
 				{
-					"text": "I shall converse with you at a later time.",
+					"text": "Oh I was just looking around.",
 					"goto": -2
 				}
 			]
-		}
+		},
+		{
+			"text": "Monsters? There have been no monsters around these parts for several days. Weeks even. But I did notice that my monster-curse-detection orb started glowing when you came in.",
+			"options": [
+				{
+					"text": "So what can I do?",
+					"goto": 2
+				}
+			]
+		},
+		{
+			"text": "I think I have the things I used the last time I performed a cleaning ritual. I only need some fairy-piss. If you want my help then you have to go to the Piss-Fairy Forest.",
+			"options": [
+				{
+					"text": "I'm off then!",
+					"goto": -2
+				}
+			]
+		},
 	]
 }
