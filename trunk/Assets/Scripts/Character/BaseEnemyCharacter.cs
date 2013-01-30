@@ -64,7 +64,9 @@ public class BaseEnemyCharacter: BaseCharacter {
 			if(accuracyLuck < _accuracyPercent) {
 				int damage = _random.Next(_minimumDamage, _maximumDamage);
 				_player.Health = _player.Health - damage;
+				Debug.Log ("NPC Hit player for "+damage+" damage");
 			} else {
+				Debug.Log ("NPC missed");
 				//Missed
 			}
 			if(_target.position.x < transform.position.x) {
