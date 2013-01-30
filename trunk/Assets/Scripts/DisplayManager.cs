@@ -15,6 +15,8 @@ public class DisplayManager : MonoBehaviour {
 	private int _healthBarYLoc;
 	private Rect _healthBarPos;
 	private Texture2D _healthBar;
+	private Texture2D _healthBarBackground;
+	private Texture2D _circle;
 	
 	//CLOCK
 	private Texture2D _clockBackground;
@@ -29,7 +31,7 @@ public class DisplayManager : MonoBehaviour {
 	private Rect _inventoryWindow = new Rect(100,200,400,250);
 	private bool _canCraftItem;
 	private Formula  _selectedFormula;
-	private Explosive _selectedExplosive;
+	private Item _selectedItem;
 	
 	// Use this for initialization
 	void Start () {
@@ -51,6 +53,8 @@ public class DisplayManager : MonoBehaviour {
 		_clockHand = Resources.Load("GUI/clockhand") as Texture2D;
 		_clockBackground = Resources.Load("GUI/clock") as Texture2D;
 		_healthBar = Resources.Load("GUI/healthbar") as Texture2D;
+		_healthBarBackground = Resources.Load("GUI/boxPlain") as Texture2D;
+		_circle = Resources.Load("GUI/circle") as Texture2D;
 	}
 	
 	// Update is called once per frame
@@ -69,18 +73,17 @@ public class DisplayManager : MonoBehaviour {
 		if(_showInventory) {
 			_inventoryWindow = GUI.Window(1, _inventoryWindow, ShowInventory, "Inventory");			
 		}
-		if(_showDialogue) {
-			
-		}
 	}
 	
-	public void ChangeDisplayState(string showObject) {
+	public void ChangeDisplayState(string showObject, bool condition) {
 		if(showObject == "inventory")
-			_showInventory = !_showInventory;
+			_showInventory = condition;
 		else if(showObject == "hud")
-			_showHud = !_showHud;
-		else if(showObject == "dialogue")
-			_showDialogue = !_showDialogue;
+			_showHud = condition;
+	}
+	
+	public void ToggleInventory() {
+		_showInventory = !_showInventory;
 	}
 	
 	#region HUD	
@@ -90,17 +93,21 @@ public class DisplayManager : MonoBehaviour {
 		_clockAngle = 0;
     }
 	
-	private void ShowHud() {	
+	private void ShowHud() {
 		//HEALTH BAR
-		GUI.DrawTexture(new Rect(150, _healthBarYLoc, _healthBarLength, 20), _healthBar);
+		GUI.DrawTexture(new Rect(70, _healthBarYLoc, Screen.width/2+5, 30), _healthBarBackground);
+		GUI.DrawTexture(new Rect(70, _healthBarYLoc+3, _healthBarLength, 24), _healthBar);
 		GUI.Label(new Rect(150, _healthBarYLoc, _healthBarLength, 20), _curHealth + "/" + _maxHealth);
 		
 		//WEAPONS
-		if(_player.Weapon != null)
+		GUI.DrawTexture(new Rect(0,128,64,64), _circle);
+		if(_player.Weapon != null) 
 			GUI.DrawTexture(new Rect(0,128,64,64), _player.Weapon._icon);
-		if(_inventory.GetEquippedExplosive() != null)
-			GUI.DrawTexture(new Rect(0,128+64,64,64), _inventory.GetEquippedExplosive()._icon);
 		
+		GUI.DrawTexture(new Rect(0,128+64,64,64), _circle);
+		if(_inventory.GetEquippedItem() != null) 
+			GUI.DrawTexture(new Rect(0,128+64,64,64), _inventory.GetEquippedItem()._icon);
+
 		//CLOCK
 		//if (Application.isEditor) { UpdateSettings(); } --- DNO WHAT THIS IS LOL
 		GUI.DrawTexture(_clockPos, _clockBackground);
@@ -136,11 +143,11 @@ public class DisplayManager : MonoBehaviour {
 		
 		y += 60;
 		x = 0;
-		foreach(Explosive e in bombs) {
-			if (GUI.Button(new Rect(x, y, 64, 64), e._icon)) {
-				_selectedExplosive = e;
+		foreach(Item i in bombs) {
+			if (GUI.Button(new Rect(x, y, 64, 64), i._icon)) {
+				_selectedItem = i;
 			}
-			GUI.Label(new Rect(x+5, y+10, 30, 30), e._amount.ToString());
+			GUI.Label(new Rect(x+5, y+10, 30, 30), i._amount.ToString());
 			x+= 70;
 		} 
 		
@@ -162,17 +169,13 @@ public class DisplayManager : MonoBehaviour {
 	}
 	
 	private void EquipBtnPressed() {
-		if(_selectedExplosive != null)
-			_inventory.EquipItem(_selectedExplosive);
+		if(_selectedItem != null)
+			_inventory.EquipItem(_selectedItem);
 	}
 	
 	private void FormulaBtnPressed(Formula f) {
 		_selectedFormula = f;
 		_canCraftItem = _inventory.CheckIngredients(_selectedFormula);
 	}
-	#endregion
-	
-	private void ShowDialogue() {
-		
-	}
+	#endregion	
 }

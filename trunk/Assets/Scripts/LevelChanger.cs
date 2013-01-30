@@ -3,6 +3,7 @@ using System.Collections;
 
 public class LevelChanger: MonoBehaviour {
 	
+	private DisplayManager _dispManager;
 	private GUISkin _customSkin;
 	private string _char;
 	private string _quote;
@@ -33,6 +34,8 @@ public class LevelChanger: MonoBehaviour {
 		_customSkin = Resources.Load("Gui/DialogueSkin") as GUISkin;
 		
 		GameObject player = GameObject.FindWithTag("Player");
+		_dispManager = player.GetComponent("DisplayManager") as DisplayManager;
+		
 		Vector3 spawnPoint = GameObject.FindWithTag("PlayerSpawn").transform.position;
 		float playerHeight = player.transform.lossyScale.y/player.transform.lossyScale.x;
 		spawnPoint.y += playerHeight;
@@ -47,7 +50,7 @@ public class LevelChanger: MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		if(_showConfimation){
+		if(_showConfimation){			
 			GUI.skin = _customSkin;
 			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Resources.Load("Gui/black")as Texture2D);
 			GUI.DrawTexture(new Rect(Screen.width-Screen.width/3, 0, 256, 512), _portrait);
@@ -63,9 +66,11 @@ public class LevelChanger: MonoBehaviour {
 	
     void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Player") {
-			Debug.Log(Application.loadedLevelName);
 			SetQuote(Application.loadedLevelName);
 			_showConfimation = true;
+			Time.timeScale = 0;
+			_dispManager.ChangeDisplayState("hud", false);
+			_dispManager.ChangeDisplayState("inventory", false);
 		}
     }
 	
@@ -83,6 +88,8 @@ public class LevelChanger: MonoBehaviour {
 	
 	private void CloseConfirmation() {
 		_showConfimation = false;
+		Time.timeScale = 1;
+		_dispManager.ChangeDisplayState("hud", true);
 	}
 	
 	private void SetQuote(string curLevel) {
@@ -96,17 +103,17 @@ public class LevelChanger: MonoBehaviour {
 			case "graveyard":
 			_char = "The Gravedigger";
 			_quote = quotesDigger[index];
-			_portrait = Resources.Load("Portraits/gravedigger")as Texture2D;
+			_portrait = Resources.Load("Portraits/gravedigger_plain")as Texture2D;
 			break;
 			case "doctor":
 			_char = "The Doctor";
 			_quote = quotesDoctor[index];
-			_portrait = Resources.Load("Portraits/doctor")as Texture2D;
+			_portrait = Resources.Load("Portraits/doctor_plain")as Texture2D;
 			break;
 			case "haldjamets":
 			_char = "Piss Fairy";
 			_quote = quotesFairy[index];
-			_portrait = Resources.Load("Portraits/fairy")as Texture2D;
+			_portrait = Resources.Load("Portraits/fairy_plain")as Texture2D;
 			break;
 		}
 	}

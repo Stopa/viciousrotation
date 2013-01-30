@@ -91,16 +91,13 @@ public class PlayerCharacter: BaseCharacter {
 	private void InitWeapons() {
 		_weapons = new ArrayList();
 		_weapons.Add(new Weapon("melee_1", "melee", 5.0f, 5, 1.0f));
-		_weapons.Add(new Weapon("melee_2", "melee", 4.0f, 10, 1.0f));
-		_weapons.Add(new Weapon("ranged_1", "ranged", 15.0f, 15, 3.0f));
+		_weapons.Add(new Weapon("melee_2", "melee", 4.0f, 10, 2.0f));
 		Weapon = _weapons[0] as Weapon;	
 		
 		Weapon w = _weapons[0] as Weapon;
 		w._icon = Resources.Load("Item/Icon/melee_1") as Texture2D;
 		w = _weapons[1] as Weapon;
 		w._icon = Resources.Load("Item/Icon/melee_2") as Texture2D;
-		w = _weapons[2] as Weapon;
-		w._icon = Resources.Load("Item/Icon/ranged") as Texture2D;
 
 		Explosive e = new Explosive(1,"bomb_1", 15.0f, 4.0f, 10, 3.0f);
 		e._icon = Resources.Load("Item/Icon/bomb_1") as Texture2D;
@@ -119,16 +116,26 @@ public class PlayerCharacter: BaseCharacter {
 		i2._amount = 2;
 		_inventory.AddItem(i2);
 		
-		Formula f = new Formula(1, "formula_1");
+		Ingredient i3 = new Ingredient(3, "ingredient_3");
+		i3._icon = Resources.Load("Item/Icon/ingredient_3") as Texture2D;
+		i3._amount = 2;
+		_inventory.AddItem(i3);
+		
+		Formula f = new Formula(1, "formula_1", 1);
 		f._icon = Resources.Load("Item/Icon/formula_1") as Texture2D;
-		f._ingredients.Add(i, 1);
+		f._ingredients.Add(1, 1);
 		_inventory.AddItem(f);
 		
-		Formula f2 = new Formula(2, "formula_2");
+		Formula f2 = new Formula(2, "formula_2", 2);
 		f2._icon = Resources.Load("Item/Icon/formula_2") as Texture2D;
-		f2._ingredients.Add(i, 3);
-		f2._ingredients.Add(i2, 1);
+		f2._ingredients.Add(1, 1);
+		f2._ingredients.Add(2, 2);
 		_inventory.AddItem(f2);
+		
+		Formula f3 = new Formula(3, "formula_3", 3);
+		f3._icon = Resources.Load("Item/Icon/formula_3") as Texture2D;
+		f3._ingredients.Add(3, 2);
+		_inventory.AddItem(f3);
 	}
 	#endregion
 	
@@ -245,7 +252,6 @@ public class PlayerCharacter: BaseCharacter {
 				
 				if(target != null) {
 					if(target.tag == "Enemy" && _attackTimer <= 0) {
-						Debug.Log("Hit enemy: " + target.name);
 						Attack(target);
 						_attackTimer = Weapon._cooldown;
 					}
@@ -264,15 +270,18 @@ public class PlayerCharacter: BaseCharacter {
 			}
 	
 			else if(Input.GetButtonDown("Fire2")) {	
-				Explosive e = _inventory.GetEquippedExplosive();
-				if(e != null) {
+				Item i = _inventory.GetEquippedItem();
+				if(i != null && i.GetType() == typeof(Explosive)) {
 					_actionTaken = ActionTaken.RangedAttack;
-					Debug.Log("Throwing bomb: " + e._name);
 					GameObject target = FindClickTarget();
 					GameObject explosion = (GameObject)Instantiate(Resources.Load("Prefabs/Explosion"), new Vector3(_clickPoint.x,5,_clickPoint.z), Quaternion.identity);
 					Explosion expScript = explosion.GetComponent("Explosion") as Explosion;
-					expScript._damage = 10;
-					e._amount--;
+					expScript._damage = ((Explosive)i)._damage;
+					_inventory.UseEquippedItem();
+				}
+				else if(i != null && i.GetType() == typeof(Potion)) {
+					AdjustCurrentHealth(((Potion)i)._healAmount);
+					_inventory.UseEquippedItem();
 				}
 			}
 		}
@@ -282,7 +291,7 @@ public class PlayerCharacter: BaseCharacter {
 		}		
 		if(Input.GetKeyUp(KeyCode.I)) {
 			DisplayManager disp = gameObject.GetComponent("DisplayManager") as DisplayManager;			
-			disp.ChangeDisplayState("inventory");
+			disp.ToggleInventory();
 			_canAttack = !_canAttack;
 		}
 	}
@@ -300,14 +309,12 @@ public class PlayerCharacter: BaseCharacter {
 		//if clicked on ground, get clickpoint
 		if(ground.Raycast(cameraRay, out dist)){
 			_clickPoint = new Vector3(cameraRay.GetPoint(dist).x, playerPos.y, cameraRay.GetPoint(dist).z);
-         	//Debug.Log("clickpoint " + _clickPoint);
 			LookTowards(_clickPoint);
 		}
 		
 		//if clicked on another object
 		RaycastHit hit;
 		if(Physics.Raycast(cameraRay, out hit, dist)) {
-			//Debug.Log(hit.distance);
 			return hit.collider.gameObject;
 		}
 		
@@ -318,14 +325,9 @@ public class PlayerCharacter: BaseCharacter {
 		float distance = Vector3.Distance(target.transform.position, transform.position);
 		
 		if(distance <= _curWeapon._range){	
-			Debug.Log("Distance " + distance + ". Damage to " +target.tag + ": " + _curWeapon._damage);
 			BaseCharacter bc = (BaseCharacter)target.GetComponent("BaseCharacter");
 			bc.AdjustCurrentHealth(-(_curWeapon._damage));
 		}		
-	}
-	
-	private void ThrowBomb() {
-		
 	}
 	#endregion
 }

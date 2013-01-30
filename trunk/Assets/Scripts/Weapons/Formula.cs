@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 public class Formula : Item {
 	
-	public Dictionary<Ingredient, int> _ingredients;
+	public Dictionary<int, int> _ingredients;
+	public int _productId;
 	
-	public Formula(int id, string name) {
+	public Formula(int id, string name, int productId) {
 		_id = id;
 		_name = name;	
-		_ingredients = new Dictionary<Ingredient, int>();
+		_ingredients = new Dictionary<int, int>();
+		_productId = productId;
 	}
 }
