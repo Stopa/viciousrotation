@@ -127,7 +127,7 @@ public class StoryDisplay : MonoBehaviour {
 			_texts.Enqueue(text_1);
 			Queue<string> text_2 = new Queue<string>();
 			text_2.Enqueue("The curse is gone and you can live a normal life once again.");
-			text_2.Enqueue("And what else would a scientist do now?");
+			text_2.Enqueue("And what would a scientist do now?");
 			_texts.Enqueue(text_2);
 			Queue<string> text_3 = new Queue<string>();
 			text_3.Enqueue("But of course continue his work!");
