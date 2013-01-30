@@ -19,6 +19,9 @@ public class PissFairyChat : BaseNPCChat {
 			spawner._fauxActive=true;
 		}
 		Debug.Log ("Good end!");
+		GameObject player = GameObject.FindWithTag("Player");
+		PlayerCharacter pc = player.GetComponent("PlayerCharacter") as PlayerCharacter;
+		pc.SetFlag("gotPiss",true);
 	}
 	
 	public override void BadEnd() {

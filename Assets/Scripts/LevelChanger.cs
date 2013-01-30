@@ -23,7 +23,7 @@ public class LevelChanger: MonoBehaviour {
 		}
 		if(!GameObject.FindGameObjectWithTag("GameCamera")) {
 			Instantiate(Resources.Load("Prefabs/GameCamera"), transform.position, Quaternion.identity);
-		}
+		}		
 	}
 	
 	void Start() {
@@ -40,6 +40,21 @@ public class LevelChanger: MonoBehaviour {
 		float playerHeight = player.transform.lossyScale.y/player.transform.lossyScale.x;
 		spawnPoint.y += playerHeight;
 		player.transform.position = spawnPoint;
+		
+		if(Application.loadedLevelName == "doctor") {			
+			PlayerCharacter pc = player.GetComponent("PlayerCharacter") as PlayerCharacter;
+			if(pc.GetFlag("gotPiss")) {
+				spawnPoint = GameObject.Find("SmokeBeardSpawn").transform.position;
+				spawnPoint.y += playerHeight;
+				Instantiate(Resources.Load("Prefabs/NPCs/Enemies/SmokeBeard/SmokeBeard"), spawnPoint, Quaternion.identity);
+			}
+			else {
+				spawnPoint = GameObject.Find("DoctorSpawn").transform.position;
+				spawnPoint.y += playerHeight;
+				Instantiate(Resources.Load("Prefabs/NPCs/Friendly/Doctor"), spawnPoint, Quaternion.identity);
+				
+			}
+		}
 	}
 	
 	void Update() {
@@ -78,7 +93,7 @@ public class LevelChanger: MonoBehaviour {
 	private void ChangeLevel(string curLevel) {
 		Time.timeScale = 1;
 		if(curLevel == "graveyard") {
-			Application.LoadLevel("haldjamets");
+			Application.LoadLevel("doctor");
 		}
 		else if(curLevel == "doctor") {
 			Application.LoadLevel("haldjamets");

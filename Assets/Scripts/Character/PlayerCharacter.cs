@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerCharacter: BaseCharacter {
 	
@@ -13,6 +14,7 @@ public class PlayerCharacter: BaseCharacter {
 	private ArrayList _weapons;
 	private Weapon _curWeapon;
 	public Texture2D _portrait;
+	private Dictionary<string, bool> _flags;
 	
 	public Weapon Weapon {
 		get{ return _curWeapon;}
@@ -29,6 +31,8 @@ public class PlayerCharacter: BaseCharacter {
 		
 		InitAttributes("P. McPlayer", 4, 100,100);
 		_inventory = new Inventory();
+		_flags = new Dictionary<string, bool>();
+		
 		InitWeapons();
 		InitItems();
 	}
@@ -341,6 +345,14 @@ public class PlayerCharacter: BaseCharacter {
 	#endregion
 	
 	public void SetFlag(string flag, bool value) {
-		
+		_flags.Add(flag,value);
+	}
+	
+	public bool GetFlag(string flag) {
+		if (_flags.ContainsKey(flag)) {
+	    	return true;
+		Debug.Log("adasd");	
+		}
+		return false;
 	}
 }
