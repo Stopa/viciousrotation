@@ -6,6 +6,7 @@ public abstract class BaseNPCChat: MonoBehaviour {
 	private float _talkDistance;
 	public Texture2D _portrait;
 	public string _chatFile;
+	public bool _canTalk;
 	
 	public float TalkDistance {
 		get {return _talkDistance;}
