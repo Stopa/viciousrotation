@@ -136,11 +136,21 @@ public class LevelChanger: MonoBehaviour {
 	}
 	
 	void CheckExitConditions() {
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-		GameObject[] actSpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
-		GameObject[] disSpawners = GameObject.FindGameObjectsWithTag("DisabledEnemySpawner");
-		if(enemies.Length == 0 && actSpawners.Length == 0 && disSpawners.Length == 0) {
-			_canExit = true;
+		if(Application.loadedLevelName == "doctor") {
+			GameObject player = GameObject.FindWithTag("Player");	
+			PlayerCharacter pc = player.GetComponent("PlayerCharacter") as PlayerCharacter;
+			if(pc.GetFlag("talkedDoctor")) 
+				_canExit = true;
+			if(pc.GetFlag("gotPiss"))
+				_canExit = false;
+		}
+		else {
+			GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+			GameObject[] actSpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+			GameObject[] disSpawners = GameObject.FindGameObjectsWithTag("DisabledEnemySpawner");
+			if(enemies.Length == 0 && actSpawners.Length == 0 && disSpawners.Length == 0) {
+				_canExit = true;
+			}
 		}
 	}
 }

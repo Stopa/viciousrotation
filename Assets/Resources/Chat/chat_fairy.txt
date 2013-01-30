@@ -1,0 +1,35 @@
+{
+	"chat": [
+		{
+			"text": "What's up>",
+			"options": [
+				{
+					"text": "the good way...",
+					"goto": 1
+				},
+				{
+					"text": "Why hello there little one! I am in search of some magical fairy piss.",
+					"goto": 2
+				}
+			]
+		},
+		{
+			"text": "YOU OPENED MY MOST SECRET QUESTION!",
+			"options": [
+				{
+					"text": "Uhh...",
+					"goto": -1
+				}
+			]
+		},
+		{
+			"text": "Little!? How dare you insult me, bastard! Die!",
+			"options": [
+				{
+					"text": "Uhhh...",
+					"goto": -2
+				}
+			]
+		}
+	]
+}

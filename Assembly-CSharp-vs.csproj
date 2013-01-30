@@ -101,6 +101,7 @@
      <None Include="Assets\Resources\Chat\chat_doctor.txt" />
      <None Include="Assets\Resources\Chat\chat.txt" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\Resources\Chat\chat_fairy.txt" />
      <None Include="Assets\Resources\Chat\bossmonster.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
