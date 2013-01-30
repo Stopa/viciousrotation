@@ -31,6 +31,7 @@ public class DisplayManager : MonoBehaviour {
 	private Rect _inventoryWindow = new Rect(100,200,250,250);
 	private bool _canCraftItem;
 	private Formula  _selectedFormula;
+	private bool _canEquipItem;
 	private Item _selectedItem;
 	
 	// Use this for initialization
@@ -49,6 +50,7 @@ public class DisplayManager : MonoBehaviour {
 		
 		_inventory = _player._inventory;
 		_canCraftItem = false;
+		_canEquipItem = false;
 		
 		_clockHand = Resources.Load("GUI/clockhand") as Texture2D;
 		_clockBackground = Resources.Load("GUI/clock") as Texture2D;
@@ -129,7 +131,7 @@ public class DisplayManager : MonoBehaviour {
 		int x = 10;
 		foreach(Formula f in formulas) {
 			if (GUI.Button(new Rect(x, y, 64, 64), f._icon))
-				FormulaBtnPressed(f);
+				FormulaPressed(f);
 			x+= 70;
 		}
 		
@@ -144,9 +146,8 @@ public class DisplayManager : MonoBehaviour {
 		y += 60;
 		x = 10;
 		foreach(Item i in bombs) {
-			if (GUI.Button(new Rect(x, y, 64, 64), i._icon)) {
-				_selectedItem = i;
-			}
+			if (GUI.Button(new Rect(x, y, 64, 64), i._icon))
+				ItemPressed(i);
 			GUI.Label(new Rect(x+5, y+5, 30, 30), i._amount.ToString());
 			x+= 70;
 		} 
@@ -158,6 +159,7 @@ public class DisplayManager : MonoBehaviour {
              CraftBtnPressed();
 		GUI.enabled = true;
 		
+		GUI.enabled = _canEquipItem;
 		if (GUI.Button(new Rect(70, y, 50, 30), "Equip!"))
              EquipBtnPressed();
 		
@@ -166,17 +168,25 @@ public class DisplayManager : MonoBehaviour {
 	
 	private void CraftBtnPressed() {
 		_inventory.CraftItem(_selectedFormula);
-		_canCraftItem = _inventory.CheckIngredients(_selectedFormula);
+		_canCraftItem = _inventory.CheckIngredients(_selectedFormula);		
 	}
 	
 	private void EquipBtnPressed() {
 		if(_selectedItem != null)
 			_inventory.EquipItem(_selectedItem);
+		_canEquipItem = false;
 	}
 	
-	private void FormulaBtnPressed(Formula f) {
+	private void FormulaPressed(Formula f) {
 		_selectedFormula = f;
 		_canCraftItem = _inventory.CheckIngredients(_selectedFormula);
+		_canEquipItem = false;
+	}
+	
+	private void ItemPressed(Item i) {
+		_selectedItem = i;
+		_canEquipItem = true;
+		_canCraftItem = false;
 	}
 	#endregion	
 }
