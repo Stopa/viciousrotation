@@ -16,10 +16,10 @@ public class ExplosionBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if(!_delegateSet) {
+		/*if(!_delegateSet) {
 			_sprite.sprite.SetAnimCompleteDelegate(new Sprite.AnimCompleteDelegate(ExplosionDeath));
 			_delegateSet = true;
-		}
+		}*/
 		if(_sprite.IsAnimationNotRunning("idle")) { //TODO - define default animation otherwise if needed
 			_sprite.PlayAnimation("idle");
 		}
