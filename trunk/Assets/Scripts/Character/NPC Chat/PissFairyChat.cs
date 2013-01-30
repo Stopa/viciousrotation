@@ -7,7 +7,7 @@ public class PissFairyChat : BaseNPCChat {
 		Name = "Piss Fairy";
 		_portrait = Resources.Load ("Portraits/Fairy") as Texture2D;
 		TalkDistance = 7f;
-		_chatFile = "chat";
+		_chatFile = "chat_fairy";
 		_canTalk = true;
 	}
 	

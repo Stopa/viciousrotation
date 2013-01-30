@@ -345,7 +345,8 @@ public class PlayerCharacter: BaseCharacter {
 	#endregion
 	
 	public void SetFlag(string flag, bool value) {
-		_flags.Add(flag,value);
+		if (!_flags.ContainsKey(flag))
+			_flags.Add(flag,value);
 	}
 	
 	public bool GetFlag(string flag) {

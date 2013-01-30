@@ -16,10 +16,6 @@ public class DoctorChat: BaseNPCChat {
 		GameObject player = GameObject.FindWithTag("Player");
 		PlayerCharacter pc = player.GetComponent("PlayerCharacter") as PlayerCharacter;
 		pc.SetFlag("talkedDoctor", true);
-		
-		GameObject exit = GameObject.Find("ExitCollider");
-		LevelChanger lc = exit.GetComponent("LevelChanger") as LevelChanger;
-		lc._canExit = true;
 		_canTalk = false;
 	}
 	
