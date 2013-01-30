@@ -6,7 +6,7 @@ public class Explosion : MonoBehaviour {
 	public bool _isEnemy;
 	
     void OnTriggerEnter(Collider other) {
-		if(other.gameObject.tag == "Enemy" || other.gameObject.tag=="Player"&&_isEnemy) {
+		if(other.gameObject.tag == "Enemy" || other.gameObject.tag=="Player"&&_isEnemy || other.gameObject.tag == "BossMonster") {
         	Debug.Log(other.gameObject.name + " received " + _damage + " damage");
 			BaseCharacter bc = other.gameObject.GetComponent("BaseCharacter") as BaseCharacter;
 			bc.AdjustCurrentHealth(-_damage);
