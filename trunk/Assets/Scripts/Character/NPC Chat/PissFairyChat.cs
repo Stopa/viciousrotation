@@ -24,7 +24,7 @@ public class PissFairyChat : BaseNPCChat {
 		PlayerCharacter pc = player.GetComponent("PlayerCharacter") as PlayerCharacter;
 		pc.SetFlag("gotPiss",true);
 		_canTalk = false;
-		Instantiate(Resources.Load("Prefabs/NPCs/Enemies/Enemy_EvilPissFairy"), transform.position, Quaternion.identity);
+		//Instantiate(Resources.Load("Prefabs/NPCs/Enemies/Enemy_EvilPissFairy"), transform.position, Quaternion.identity);
 		
 		GameObject[] spawners = GameObject.FindGameObjectsWithTag("DisabledEnemySpawner");
 		Debug.Log (spawners.Length);
