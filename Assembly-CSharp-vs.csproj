@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{3957CFF3-D2EC-085E-D6E5-6EC018D90CEF}</ProjectGuid>
+	<ProjectGuid>{D3E8E648-D299-19F4-C16A-9D5844BD1D34}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>E:/proge/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>E:/proge/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -71,7 +71,6 @@
      <Compile Include="Assets\Scripts\LevelChanger.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\MiniJSON\MiniJSON.cs" />
-     <Compile Include="Assets\Scripts\SoundManager.cs" />
      <Compile Include="Assets\Scripts\Spawner\BaseDisabledSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawner\BaseSpawner.cs" />
      <Compile Include="Assets\Scripts\SpriteManager\LinkedSpriteManager.cs" />
@@ -102,15 +101,10 @@
      <None Include="Assets\Resources\Chat\chat_doctor.txt" />
      <None Include="Assets\Resources\Chat\chat.txt" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-     <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
      <None Include="Assets\Resources\Chat\bossmonster.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{DA574D66-499C-E006-B846-CA214556CD4C}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

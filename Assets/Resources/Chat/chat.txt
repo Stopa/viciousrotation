@@ -1,41 +1,59 @@
 {
 	"chat": [
 		{
-			"text": "here is my question to you",
+			"text": "	Hello, handsome stranger. How can I help you?",
 			"options": [
 				{
-					"text": "and here is my answer",
+					"text": "You have beautiful eyes.",
 					"goto": 1
 				},
 				{
-					"text": "here is another answer",
+					"text": "I am cursed and I need your piss.",
 					"goto": 2
 				},
 				{
-					"text": "and yet another one",
-					"goto": -1
+					"text": "Who are you?",
+					"goto": 3
 				},
 				{
-					"text": "answers are many, question is one",
-					"goto": -2
+					"text": "Have you ever heard of the Neo Armstrong Cyclone Jet Armstrong Cannon?",
+					"goto": 4
 				}
 			]
 		},
 		{
-			"text": "YOU OPENED MY MOST SECRET QUESTION!",
+			"text": "	Tee-hee. You are such a charmer.",
 			"options": [
 				{
-					"text": "NOW CLICK THIS",
+					"text": "Only you can help me. I am in danger and even if it sounds wrong I need your urine. Trust me. It is for science.",
 					"goto": -1
 				}
 			]
 		},
 		{
-			"text": "THIS IS MY SECOND QUESTION",
+			"text": "	Get lost, you pervert.",
 			"options": [
 				{
 					"text": "OH NOES",
 					"goto": -2
+				}
+			]
+		}
+		{
+			"text": "	I'm a piss-fairy you silly. Who else would be living in the Piss-Fairy Forest.",
+			"options": [
+				{
+					"text": "Cool beans, little turnip. Can I have your piss?",
+					"goto": 2
+				}
+			]
+		}
+		{
+			"text": "	The NACJAC. Of course I have heard of it. My great grandfather was THE Neo Armstrong. I am Pipi Armstrong the XXII. Ask me anything.",
+			"options": [
+				{
+					"text": "	Great! Then I'll make it short. I need your piss.",
+					"goto": -1
 				}
 			]
 		}

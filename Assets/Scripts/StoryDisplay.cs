@@ -98,20 +98,20 @@ public class StoryDisplay : MonoBehaviour {
 			_images.Enqueue(Resources.Load("Story/start_4") as Texture2D);
 	
 			Queue<string> text_1 = new Queue<string>();
-			text_1.Enqueue("Text_1_1");
-			text_1.Enqueue("Text_1_2");
+			text_1.Enqueue("You are a scientist. You even have a laboratory!");
+			text_1.Enqueue("As a man of science you are expected to conduct scientific experiments.");
 			_texts.Enqueue(text_1);
 			Queue<string> text_2 = new Queue<string>();
-			text_2.Enqueue("Text_2_1");
-			text_2.Enqueue("Text_2_2");
+			text_2.Enqueue("Unfortunately that means the occasional spill of acid or a housefire...");
+			text_2.Enqueue("And sometimes you might just blow yourself up while researching demonic magic.");
 			_texts.Enqueue(text_2);
 			Queue<string> text_3 = new Queue<string>();
-			text_3.Enqueue("Text_3_1");
-			text_3.Enqueue("Text_3_2");
+			text_3.Enqueue("All the villagers wept when you were buried.");
+			text_3.Enqueue("Little did they know that your science would live on.");
 			_texts.Enqueue(text_3);
 			Queue<string> text_4 = new Queue<string>();
-			text_4.Enqueue("Text_4_1");
-			text_4.Enqueue("Text_4_2");
+			text_4.Enqueue("The demonic magic found it's way into your body.");
+			text_4.Enqueue("And it will not let rest.");
 			_texts.Enqueue(text_4);
 			
 			_btnLabel = "Continue";
@@ -122,16 +122,16 @@ public class StoryDisplay : MonoBehaviour {
 			_images.Enqueue(Resources.Load("Story/end_2_2") as Texture2D);
 	
 			Queue<string> text_1 = new Queue<string>();
-			text_1.Enqueue("Text_1_1");
-			text_1.Enqueue("Text_1_2");
+			text_1.Enqueue("Rejoice for you are victorious.");
+			text_1.Enqueue("You killed your nemesis and buried his remains.");
 			_texts.Enqueue(text_1);
 			Queue<string> text_2 = new Queue<string>();
-			text_2.Enqueue("Text_2_1");
-			text_2.Enqueue("Text_2_2");
+			text_2.Enqueue("The curse is gone and you can live a normal life once again.");
+			text_2.Enqueue("And what else would a scientist do now?");
 			_texts.Enqueue(text_2);
 			Queue<string> text_3 = new Queue<string>();
-			text_3.Enqueue("Text_3_1");
-			text_3.Enqueue("Text_3_2");
+			text_3.Enqueue("But of course continue his work!");
+			text_3.Enqueue("Because science never waits.");
 			_texts.Enqueue(text_3);
 			
 			_btnLabel = "Exit";
