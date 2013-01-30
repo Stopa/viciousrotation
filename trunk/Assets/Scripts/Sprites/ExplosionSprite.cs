@@ -8,7 +8,7 @@ public class ExplosionSprite : BaseSprite {
 		this.spriteWorldHeight = 8f;
 		this.spriteWorldWidth = 8f;
 		this.spriteWidth = 128;
-		this.spriteHeight =128;
+		this.spriteHeight = 128;
 	}
 	
 	protected override void DefineSpriteAnimations() {
