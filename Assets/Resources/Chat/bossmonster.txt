@@ -1,7 +1,7 @@
 {
 	"chat": [
 		{
-			"text": "	We meet once again laddy-boy.",
+			"text": "We meet once again laddy-boy.",
 			"options": [
 				{
 					"text": "You tried to kill me!",
@@ -15,7 +15,7 @@
 		},
 		
 		{
-			"text": "	You were threatening my status! Did you know that those demonic documents contained the secret of turning gold into brass. Brass is the manliest of metals.",
+			"text": "You were threatening my status! Did you know that those demonic documents contained the secret of turning gold into brass. Brass is the manliest of metals.",
 			"options": [
 				{
 					"text": "Brass is an ALLOY!",
@@ -24,7 +24,7 @@
 			]
 		},
 		{
-			"text": "	I am the king of brass. I can not allow you to ruin my business.",
+			"text": "I am the king of brass. I can not allow you to ruin my business.",
 			"options": [
 				{
 					"text": "We fight!",
