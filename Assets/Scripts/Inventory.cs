@@ -30,37 +30,35 @@ public class Inventory {
 	
 	#region item creation
 	public void CraftItem(Formula formula) {
-		Debug.Log("Crafting from formula: " + formula._name);
 		ArrayList tempIngredients = _ingredients;
-
-		Dictionary<Ingredient, int> d = formula._ingredients;
+		Dictionary<int, int> d = formula._ingredients;
+		
 		foreach (var pair in d){
 			foreach(Ingredient i in _ingredients) {
-				if(i._name == pair.Key._name) {
+				if(i._id == pair.Key) {
 					i._amount -= pair.Value;
 					break;
 				}
 			} 
 		}	
 		_ingredients = tempIngredients;	
-		AddItem(CreateExplosive(1));
+		AddItem(CreateItem(formula._productId));
 	}
 	
 	public bool CheckIngredients(Formula formula) {
-		Dictionary<Ingredient, int> d = formula._ingredients;
+		Dictionary<int, int> d = formula._ingredients;
 		foreach (var pair in d) {
 			foreach(Ingredient i in _ingredients) {
-				if(i._name == pair.Key._name) {
+				if(i._id == pair.Key) {
 					if(!(i._amount >= pair.Value))
 						return false;
-					Debug.Log(pair.Value + " - " + pair.Key._name + " - " + i._amount);
 				}
 			} 
 		}	
 		return true;
 	}
 		
-	private Item CreateExplosive(int id) {
+	private Item CreateItem(int id) {
 		Item i = null;
 		if(id == 1) {
 			i = new Explosive(1,"bomb_1", 15.0f, 4.0f, 10, 3.0f);
@@ -71,14 +69,16 @@ public class Inventory {
 			i._icon = Resources.Load("Item/Icon/bomb_2") as Texture2D;
 		}
 		else if(id == 3) {
-			
+			i = new Potion(3, "potion_1", 20);
+			i._icon = Resources.Load("Item/Icon/potion_1") as Texture2D;
 		}
-
 		i._amount = 1;
+		Debug.Log(i.GetType().ToString());
 		return i;
 	}
 	#endregion
 	
+	#region addremove
 	public void AddItem(Item item) {
 		Item existingItem = null;
 		if(item.GetType() == typeof(Formula)) 
@@ -93,28 +93,22 @@ public class Inventory {
 		}
 		
 		else if (item.GetType() == typeof(Explosive)) {
-			Debug.Log(_bombs.IndexOf(item as Explosive));
 			existingItem = CheckIfContains(_bombs, item);
 			if(existingItem != null)
 				existingItem._amount += item._amount;
 			else
 				_bombs.Add(item as Explosive);
 		}
-	}
-	
-	public void RemoveItem(Item item) {
-		if (item.GetType() == typeof(Explosive)) {
-			//_bombs.;	
+		else if (item.GetType() == typeof(Potion)) {
+			existingItem = CheckIfContains(_bombs, item);
+			if(existingItem != null)
+				existingItem._amount += item._amount;
+			else
+				_bombs.Add(item as Potion);
 		}
 	}
 	
-	public void EquipItem(Item item) {		
-		if (item.GetType() == typeof(Explosive)) {
-			_equippedIndex = _bombs.IndexOf(item as Explosive);
-		}
-	}
-	
-	public Item CheckIfContains(ArrayList list, Item item) {
+	private Item CheckIfContains(ArrayList list, Item item) {
 		foreach(Item i in list) {
 			if(i._id == item._id)
 				return i;
@@ -122,13 +116,34 @@ public class Inventory {
 		return null;
 	}
 	
-	public Explosive GetEquippedExplosive() {
+	private void RemoveItem(Item item) {
+		if (item.GetType() == typeof(Explosive)) {
+			_bombs.Remove(item);	
+		}
+		else if (item.GetType() == typeof(Ingredient)) {
+			_ingredients.Remove(item);
+		}
+	}
+	#endregion
+	
+	public void EquipItem(Item item) {		
+			_equippedIndex = _bombs.IndexOf(item);
+	}
+
+	public Item GetEquippedItem() {
 		if(_equippedIndex >= 0) {
-			Explosive e = _bombs[_equippedIndex] as Explosive;
-			if(e._amount > 0) {
-				return e;
-			}
+			Item i = _bombs[_equippedIndex] as Item;
+			if(i._amount > 0)
+				return i;
 		}
 		return null;
 	}
+	
+	public void UseEquippedItem() {
+		Item i = _bombs[_equippedIndex] as Item;
+		i._amount--;
+		if(i._amount == 0)
+			_equippedIndex = -1;
+	}
+	
 }

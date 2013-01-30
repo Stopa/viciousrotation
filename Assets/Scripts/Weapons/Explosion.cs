@@ -9,7 +9,7 @@ public class Explosion : MonoBehaviour {
         	Debug.Log(other.gameObject.name + " received " + _damage + " damage");
 			BaseCharacter bc = other.gameObject.GetComponent("BaseCharacter") as BaseCharacter;
 			bc.AdjustCurrentHealth(-_damage);
-			//other.rigidbody.AddExplosionForce(1000.0f, gameObject.transform.position, 3, 3.0f);
+			other.rigidbody.AddExplosionForce(1000.0f, gameObject.transform.position, 3, 3.0f);
 		}
     }
 	
