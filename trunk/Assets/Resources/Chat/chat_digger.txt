@@ -1,14 +1,32 @@
 {
 	"chat": [
 		{
-			"text": "grr zombies!",
+			"text": "You awoke from the dead sir. And you brought others with you sir!",
 			"options": [
 				{
-					"text": "Wasdasdsd",
-					"goto": -1
+					"text": "I did? I didn't mean to...",
+					"goto": 1
 				},
 				{
 					"text": "I shall converse with you at a later time.",
+					"goto": -2
+				}
+			]
+		},
+		{
+			"text": "The dead'uns are a bad omen sir. I think you should go see the wise man in the village sir.",
+			"options": [
+				{
+					"text": "Yes. Wise men are usually smart. I'm sure he will know what is going on. Who is the wise man?",
+					"goto": 2
+				}
+			]
+		},
+		{
+			"text": "That would be the doctor, you will find him in the doctor's office sir. But please deal with these monsters first sir. TIP: You can press the I key to bring up the inventory sir.",
+			"options": [
+				{
+					"text": "I see.",
 					"goto": -2
 				}
 			]
