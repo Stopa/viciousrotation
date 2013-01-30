@@ -1,0 +1,17 @@
+{
+	"chat": [
+		{
+			"text": "grr zombies!",
+			"options": [
+				{
+					"text": "Wasdasdsd",
+					"goto": -1
+				},
+				{
+					"text": "I shall converse with you at a later time.",
+					"goto": -2
+				}
+			]
+		}
+	]
+}

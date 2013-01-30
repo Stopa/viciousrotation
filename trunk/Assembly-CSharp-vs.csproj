@@ -98,6 +98,8 @@
      <Compile Include="Assets\Scripts\Weapons\Item.cs" />
      <Compile Include="Assets\Scripts\Weapons\Potion.cs" />
      <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
+     <None Include="Assets\Resources\Chat\chat_digger.txt" />
+     <None Include="Assets\Resources\Chat\chat_doctor.txt" />
      <None Include="Assets\Resources\Chat\chat.txt" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />

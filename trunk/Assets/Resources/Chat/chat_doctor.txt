@@ -1,0 +1,17 @@
+{
+	"chat": [
+		{
+			"text": "Hello my good chap! What can I do for you?",
+			"options": [
+				{
+					"text": "blahblah",
+					"goto": -1
+				},
+				{
+					"text": "I shall converse with you at a later time.",
+					"goto": -2
+				}
+			]
+		}
+	]
+}
